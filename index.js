@@ -37,7 +37,6 @@ const xrplToken = {
                 .setRequired(true)
         ),
     async execute(interaction) {
-        async function getAskBid() {
               const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
               await xrplClient.connect();
               const reqAsk = {
@@ -76,7 +75,6 @@ const xrplToken = {
           
               xrplClient.disconnect();
       }
-    }
   };
 
 // When the client is ready, run this code (only once)
