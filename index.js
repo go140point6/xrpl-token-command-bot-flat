@@ -23,7 +23,7 @@ const beep = {
     },
 };
 
-const commands = [ping, beep];
+const commands = [ping];
 
 const rest = new REST({ version: '10' }).setToken(token);
 
