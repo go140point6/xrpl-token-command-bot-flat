@@ -1,5 +1,7 @@
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } = require('discord.js');
+const { Client, Events, GatewayIntentBits, SlashCommandBuilder } = require('discord.js');
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v10');
 const { token, clientId, guildId } = require('./config.json');
 
 // Create a new client instance
@@ -23,12 +25,17 @@ const beep = {
     },
 };
 
-const commands = [ping];
+const commands = [{ ping, beep }];
 
 const rest = new REST({ version: '10' }).setToken(token);
 
-rest.push(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
+await rest.put(
+    Routes.applicationGuildCommands(
+        clientId, 
+        guildId
+    ), 
+    { body: commands }
+    ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
 
 // When the client is ready, run this code (only once)
