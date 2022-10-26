@@ -25,24 +25,25 @@ const beep = {
     },
 };
 
-const commands = [{ ping, beep }];
 
-const rest = new REST({ version: '10' }).setToken(token);
-
-await rest.put(
-    Routes.applicationGuildCommands(
-        clientId, 
-        guildId
-    ), 
-    { body: commands }
-    ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
-	.catch(console.error);
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-});
+    const commands = [{ ping, beep }];
+
+    const rest = new REST({ version: '10' }).setToken(token);
+
+    await rest.put(
+        Routes.applicationGuildCommands(
+            clientId, 
+            guildId
+        ), 
+        { body: commands }
+        ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
+	    .catch(console.error);
+    });
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
