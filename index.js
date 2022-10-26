@@ -30,10 +30,10 @@ const beep = {
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
     const command = [ping, beep];
-    console.log(command);
+    //console.log(command);
 
     const commandData = command.map((command) => command.data.toJSON());
-    console.log(commandData);
+    //console.log(commandData);
 
     const rest = new REST({ version: '10' }).setToken(token);
     
