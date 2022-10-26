@@ -1,6 +1,6 @@
 // Require the necessary discord.js classes
 const { Client, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } = require('discord.js');
-const { token, clientId } = require('./config.json');
+const { token, clientId, guildId } = require('./config.json');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
