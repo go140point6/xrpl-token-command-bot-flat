@@ -37,6 +37,8 @@ const xrplToken = {
                 .setRequired(true)
         ),
     async execute(interaction) {
+        await interaction.reply('589!');
+        /*
               const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
               await xrplClient.connect();
               const reqAsk = {
@@ -74,6 +76,7 @@ const xrplToken = {
               await interaction.reply(`The current ASK is ${xrplToken.Ask} and the current BID is ${xrplToken.Bid}.`);
           
               xrplClient.disconnect();
+              */
       }
   };
 
@@ -105,11 +108,11 @@ client.on(Events.InteractionCreate, async interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
+		await interaction.reply('Pong.On!');
 	} else if (commandName === 'beep') {
-		await interaction.reply('Boop!');
+		await interaction.reply('Boop.On!');
 	} else if (commandName === 'xrpl-token') {
-        await interaction.reply('589!');
+        await interaction.reply('589.On!');
     }
 });
 
