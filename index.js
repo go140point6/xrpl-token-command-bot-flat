@@ -29,9 +29,12 @@ const beep = {
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-    const commands = [ping, beep];
+    const command = [ping, beep];
+    console.log(command);
 
-    console.log(commands);
+    const commandData = command.map((command) => command.data.toJSON());
+    console.log(commandData);
+
 
     const rest = new REST({ version: '10' }).setToken(token);
     /*
