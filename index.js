@@ -1,5 +1,5 @@
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, REST, Routes } = require('discord.js');
+const { Client, Events, GatewayIntentBits, REST, Routes, SlashCommandBuilder } = require('discord.js');
 const { token, clientId } = require('./config.json');
 
 // Create a new client instance
@@ -12,6 +12,24 @@ const rest = new REST({ version: '10' }).setToken(token);
 rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
+
+ping = {
+    data: new SlashCommandBuilder()
+        .setName('ping')
+        .setDescription('Replies with Pong!'),
+    async execute(interaction) {
+        await interaction.reply('Pong!');
+    },
+};
+
+beep = {
+    data: new SlashCommandBuilder()
+        .setName('beep')
+        .setDescription('Replies with Boop!'),
+    async execute(interaction) {
+        await interaction.reply('Boop!');
+    },
+};
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
