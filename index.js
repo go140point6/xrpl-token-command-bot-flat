@@ -5,14 +5,6 @@ const { token, clientId } = require('./config.json');
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const commands = [ping, beep];
-
-const rest = new REST({ version: '10' }).setToken(token);
-
-rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
-	.catch(console.error);
-
 const ping = {
     data: new SlashCommandBuilder()
         .setName('ping')
@@ -30,6 +22,14 @@ const beep = {
         await interaction.reply('Boop!');
     },
 };
+
+const commands = [ping, beep];
+
+const rest = new REST({ version: '10' }).setToken(token);
+
+rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
+	.catch(console.error);
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
