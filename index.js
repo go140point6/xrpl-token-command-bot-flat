@@ -26,7 +26,7 @@ const beep = {
     },
 };
 
-const xrpl = {
+const xrplToken = {
     data: new SlashCommandBuilder()
         .setName('xrpl-token')
         .setDescription('Gets current ASK and BID using ticker')
@@ -68,11 +68,11 @@ const xrpl = {
               const responseBid = await xrplClient.request(reqBid);
               var ask = responseAsk.result.offers;
               var bid = responseBid.result.offers;
-              xrpl.Ask = parseFloat(ask[0].quality / 1000000).toFixed(2);
-              xrpl.Bid = parseFloat((1 / (bid[0].quality * 1000000))).toFixed(2);
-              console.log(xrpl.Ask);
-              console.log(xrpl.Bid);
-              await interaction.reply(`The current ASK is ${xrpl.Ask} and the current BID is ${xrpl.Bid}.`);
+              xrplToken.Ask = parseFloat(ask[0].quality / 1000000).toFixed(2);
+              xrplToken.Bid = parseFloat((1 / (bid[0].quality * 1000000))).toFixed(2);
+              console.log(xrplToken.Ask);
+              console.log(xrplToken.Bid);
+              await interaction.reply(`The current ASK is ${xrplToken.Ask} and the current BID is ${xrplToken.Bid}.`);
           
               xrplClient.disconnect();
       }
