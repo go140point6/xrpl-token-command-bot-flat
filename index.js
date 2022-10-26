@@ -43,8 +43,8 @@ client.once(Events.ClientReady, c => {
         { body: commands }
         ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	    .catch(console.error);
-    });
-    */ 
+    */
+    }); 
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
