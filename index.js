@@ -77,18 +77,18 @@ const xrplToken = {
           
               xrplClient.disconnect();
               */
-      }
+      },
   };
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-    const command = [ping, beep, xrpl-token];
+    const command = [ping, beep, xrplToken];
     console.log(command);
 
     const commandData = command.map((command) => command.data.toJSON());
-    //console.log(commandData);
+    console.log(commandData);
 
     const rest = new REST({ version: '10' }).setToken(token);
     
