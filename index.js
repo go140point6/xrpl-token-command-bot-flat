@@ -35,18 +35,16 @@ client.once(Events.ClientReady, c => {
     const commandData = command.map((command) => command.data.toJSON());
     console.log(commandData);
 
-
     const rest = new REST({ version: '10' }).setToken(token);
-    /*
+    
     rest.put(
         Routes.applicationGuildCommands(
             clientId, 
             guildId
         ), 
-        { body: commands }
+        { body: commandData }
         ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	    .catch(console.error);
-    */
     }); 
 
 client.on(Events.InteractionCreate, async interaction => {
