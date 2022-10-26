@@ -29,10 +29,12 @@ const beep = {
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-    const commands = [ping, beep].map(command => command.toJSON());
+    const commands = [ping, beep];
+
+    console.log(commands);
 
     const rest = new REST({ version: '10' }).setToken(token);
-
+    /*
     rest.put(
         Routes.applicationGuildCommands(
             clientId, 
@@ -42,6 +44,7 @@ client.once(Events.ClientReady, c => {
         ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	    .catch(console.error);
     });
+    */ 
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
