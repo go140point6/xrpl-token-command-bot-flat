@@ -13,7 +13,7 @@ rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
 	.then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	.catch(console.error);
 
-ping = {
+const ping = {
     data: new SlashCommandBuilder()
         .setName('ping')
         .setDescription('Replies with Pong!'),
@@ -22,7 +22,7 @@ ping = {
     },
 };
 
-beep = {
+const beep = {
     data: new SlashCommandBuilder()
         .setName('beep')
         .setDescription('Replies with Boop!'),
