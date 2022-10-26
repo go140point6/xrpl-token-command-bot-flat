@@ -3,6 +3,7 @@ const { Client, Events, GatewayIntentBits, SlashCommandBuilder } = require('disc
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const { token, clientId, guildId } = require('./config.json');
+const { xrpl } = require('xrpl');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -25,11 +26,64 @@ const beep = {
     },
 };
 
+const token = {
+    data: new SlashCommandBuilder()
+        .setName('xrpl-token')
+        .setDescription('Gets current ASK and BID using ticker')
+        .addStringOption((option) =>
+            option
+                .setName("ticker")
+                .setDescription("Common ticker of crypto.")
+                .setRequired(true)
+        ),
+    async execute(interaction) {
+        async function getAskBid() {
+              const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
+              await xrplClient.connect();
+              const reqAsk = {
+                  "command": "book_offers",
+                  "taker_gets": {
+                  "currency": "434C554200000000000000000000000000000000",
+                  "issuer": "r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4"
+                  },
+                  "taker_pays": {
+                  "currency": "XRP"
+                  },
+                  "limit": 1
+              }
+  
+              const reqBid = {
+                  "command": "book_offers",
+                  "taker_gets": {
+                      "currency": "XRP"
+                  },
+                  "taker_pays": {
+                  "currency": "434C554200000000000000000000000000000000",
+                  "issuer": "r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4"
+                  },
+                  "limit": 1
+              }
+  
+              const responseAsk = await xrplClient.request(reqAsk);
+              const responseBid = await xrplClient.request(reqBid);
+              var ask = responseAsk.result.offers;
+              var bid = responseBid.result.offers;
+              token.Ask = parseFloat(ask[0].quality / 1000000).toFixed(2);
+              token.Bid = parseFloat((1 / (bid[0].quality * 1000000))).toFixed(2);
+              console.log(token.Ask);
+              console.log(token.Bid);
+              await interaction.reply(`The current ASK is ${token.Ask} and the current BID is ${token.Bid}.`);
+          
+              xrplClient.disconnect();
+      }
+    }
+  };
+
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-    const command = [ping, beep];
+    const command = [ping, beep, xrpl-token];
     //console.log(command);
 
     const commandData = command.map((command) => command.data.toJSON());
@@ -56,7 +110,9 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply('Pong!');
 	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
-	}
+	} else if (commandName === 'xrpl-token') {
+        await interaction.reply('589!');
+    }
 });
 
 // Log in to Discord with your client's token
