@@ -44,28 +44,21 @@ const xrplToken = {
     },
 };
 
-function getXRP() {
-    return new Promise((res, rej) => {
-        console.log("getXRP");
-        getXRPPrice();
-        res();
-    })
-};
-
-async function getXRPPrice() {
+async function getXRP() {
     await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple`).then(res => {
-            if (res.data && res.data[0].current_price) {
+               if (res.data && res.data[0].current_price) {
                 //console.log("XRP is: " + res.data[0].current_price);
                 currentXRP = res.data[0].current_price.toFixed(4) || 0
                 console.log("Inside function: " + currentXRP);
             } else {
                 console.log("Error loading coin data")
             }
+            return;
         })
 }
 
 async function getPrices() {
-    const result = await getXRP()
+    await getXRP()
     console.log("Outside function: " + currentXRP);
     //await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
     //    console.log(res.data);
@@ -83,9 +76,7 @@ client.once(Events.ClientReady, c => {
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
 
-    //getPrices();
-    getXRP();
-    console.log("Outside function: " + currentXRP);
+    getPrices();
 
     const rest = new REST({ version: '10' }).setToken(token);
     
