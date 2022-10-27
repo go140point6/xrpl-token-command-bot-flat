@@ -131,20 +131,20 @@ client.on(Events.InteractionCreate, async interaction => {
         //await interaction.reply('589!');
         await getPrices();
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
-        console.log(ticker);
+        //console.log(ticker);
         let tic = xrplTokens.find(t => t.currency === ticker);
         if (tic !== undefined) {
-            console.log(tic.currency);
-            console.log(tic.issuer);
+            //console.log(tic.currency);
+            //console.log(tic.issuer);
         } else {
             console.log("meatbag");
         }
         
         if (tic !== undefined) {
-            console.log(tic.currency);
-            console.log(tic.issuer);
+            //console.log(tic.currency);
+            //console.log(tic.issuer);
             await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
-                if(res.data && res.data.pairs[0].last) {
+                if(res.data && res.data.airs[0].last) {
                     //console.log(res.data);
                     //console.log(res.data.pairs[0].last);
                     const inXRP = res.data.pairs[0].last;
