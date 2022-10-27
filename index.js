@@ -30,7 +30,8 @@ async function getPrices() {
     await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
         console.log(res.data);
         console.log(res.data.pairs);
-        console.log(res.data.pairs.base);
+        console.log(res.data.pairs.base.currency);
+        console.log(res.data.pairs.base.issuer);
     })
 };
 
