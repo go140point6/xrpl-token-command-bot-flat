@@ -77,7 +77,6 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (commandName === 'wen') {
 		//await interaction.reply('589!');
-        getTimeRemaining(endtime)
         await interaction.reply({ content: `XLS-20 in ${(getTimeRemaining(deadline).days)} days, ${(getTimeRemaining(deadline).hours)} hours, ${(getTimeRemaining(deadline).minutes)} minutes, and ${(getTimeRemaining(deadline).seconds)} seconds!`});
     }
 });
