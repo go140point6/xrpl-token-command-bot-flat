@@ -8,6 +8,8 @@ const axios = require('axios');
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+let currentXRP = '0';
+
 const xrplTokens = [
     { currency: 'BANANA', issuer: 'r3KSyXmYTYd6wd6ZwtrbEhQMjnJW3xpK4j'},
     { currency: 'CLUB', issuer: 'r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4'},
@@ -46,7 +48,8 @@ async function getXRP() {
     await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple`).then(res => {
         if (res.data && res.data[0].current_price) {
             //console.log("XRP is: " + res.data[0].current_price);
-            var currentXRP = res.data[0].current_price.toFixed(4) || 0
+            currentXRP = res.data[0].current_price.toFixed(4) || 0
+            console.log("Inside function: " + currentXRP);
         } else {
             console.log("Error loading coin data")
         }
@@ -71,7 +74,7 @@ client.once(Events.ClientReady, c => {
     //console.log(commandData);
 
     getXRP();
-    console.log("XRP is: " + currentXRP);
+    console.log("Outside function: " + currentXRP);
     getPrices();
 
     const rest = new REST({ version: '10' }).setToken(token);
