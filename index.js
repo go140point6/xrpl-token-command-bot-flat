@@ -8,7 +8,7 @@ const axios = require('axios');
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-let currentXRP = '0';
+var inUSD = 0;
 
 const xrplTokens = [
     { currency: 'BANANA', issuer: 'r3KSyXmYTYd6wd6ZwtrbEhQMjnJW3xpK4j'},
@@ -70,7 +70,7 @@ async function getPrices() {
         //console.log(res.data);
         //console.log(res.data.pairs[0].last);
         const inXRP = res.data.pairs[0].last;
-        const inUSD = (inXRP * currentXRP).toFixed(4);
+        inUSD = (inXRP * currentXRP).toFixed(4);
         console.log(inUSD);
     })
 };
