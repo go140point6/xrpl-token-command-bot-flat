@@ -130,7 +130,7 @@ client.on(Events.InteractionCreate, async interaction => {
     } else if (commandName === 'xrpl-token') {
         //await interaction.reply('589!');
         await getPrices();
-        const ticker = (interaction.options.getString("ticker", true));
+        const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         console.log(ticker);
         let tic = xrplTokens.find(t => t.currency === ticker);
         if (tic !== undefined) {
@@ -139,7 +139,7 @@ client.on(Events.InteractionCreate, async interaction => {
         } else {
             console.log("meatbag");
         }
-        /*
+        
         if (tic !== undefined) {
             await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
                 if(res.data && res.data[0].last) {
@@ -148,16 +148,14 @@ client.on(Events.InteractionCreate, async interaction => {
                     const inXRP = res.data.pairs[0].last;
                     inUSD = (inXRP * currentXRP).toFixed(4);
                     console.log(inUSD);
+                    await interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
-                //interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
+                interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
             });
         } else {
-            //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
+            interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
         }
-        */
-        //await interaction.reply("Current price: " + inUSD);
-        //await interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
 	}
 });
 
