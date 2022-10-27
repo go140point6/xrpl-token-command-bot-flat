@@ -38,7 +38,13 @@ const beep = {
 const xrplToken = {
     data: new SlashCommandBuilder()
         .setName('xrpl-token')
-        .setDescription('Last trade in USD'),
+        .setDescription('Last trade in USD')
+        .addStringOption((option) =>
+            option
+                .setName("ticker")
+                .setDescription("Common ticker of XRPL Token to lookup i.e. CLUB.")
+                .setRequired(true)
+        ),
     async execute(interaction) {
         await interaction.reply('589!');
     },
@@ -103,7 +109,9 @@ client.on(Events.InteractionCreate, async interaction => {
 	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
-        await interaction.reply('589!');
+        //await interaction.reply('589!');
+        getPrices();
+        await interaction.reply("Current price: " + inUSD);
 	}
 });
 
