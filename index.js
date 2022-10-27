@@ -130,7 +130,9 @@ client.on(Events.InteractionCreate, async interaction => {
     } else if (commandName === 'xrpl-token') {
         //await interaction.reply('589!');
         await getPrices();
-        await interaction.reply("Current price: " + inUSD);
+        const ticker = (interaction.options.getString("ticker", true));
+        console.log(ticker);
+        //await interaction.reply("Current price: " + inUSD);
         //await interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
 	}
 });
