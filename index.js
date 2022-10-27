@@ -143,8 +143,7 @@ client.on(Events.InteractionCreate, async interaction => {
         if (tic !== undefined) {
             console.log(tic.currency);
             console.log(tic.issuer);
-            //await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
-            await axios.get(`https://api.onthedex.live/public/v1/ticker/CLUB.r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4:XRP`).then(res => {                
+            await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
                 if(res.data && res.data.pairs[0].last) {
                     //console.log(res.data);
                     //console.log(res.data.pairs[0].last);
@@ -154,9 +153,10 @@ client.on(Events.InteractionCreate, async interaction => {
                     console.log(inUSD);
                     interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
-            })//.catch(err => {
-            //    interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
-            //});
+            }).catch(err => {
+                //interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
+                interaction.reply({ content: err})
+            });
         } else {
             interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
         }
