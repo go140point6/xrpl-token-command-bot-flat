@@ -5,3 +5,5 @@ async function getPairs() {
         console.log(res);
     })
 }
+
+getPairs();
