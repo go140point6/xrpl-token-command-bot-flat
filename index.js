@@ -164,7 +164,8 @@ client.once(Events.ClientReady, c => {
     const priceUpdate = async() => {
         xToken.UpdatePrice();
     }
-    
+    console.log(priceUpdate);
+
     rest.put(
         Routes.applicationGuildCommands(
             clientId, 
