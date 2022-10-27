@@ -154,9 +154,9 @@ client.on(Events.InteractionCreate, async interaction => {
                     console.log(inUSD);
                     interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
-            }).catch(err => {
-                interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
-            });
+            })//.catch(err => {
+            //    interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
+            //});
         } else {
             interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
         }
