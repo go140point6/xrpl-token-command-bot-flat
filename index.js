@@ -9,18 +9,14 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const wen = {
     data: new SlashCommandBuilder()
-        .setName('wen')
+        .setName('wen xls20')
         .setDescription('Countdown timer to xls-20 on the XRPL!'),
     async execute(interaction) {
         await interaction.reply('589!');
     },
 };
 
-const deadline = 'Oct 31 2022 08:41:41 UTC';
-var remDays;
-var remHours;
-var remMinutes;
-var remSeconds;
+const deadline = 'Oct 31 2022 20:41:41 UTC';
 
 console.log(deadline);
 
@@ -41,11 +37,11 @@ function getTimeRemaining(endtime) {
 }
 
 
-console.log(getTimeRemaining(deadline).total);
-console.log(getTimeRemaining(deadline).days);
-console.log(getTimeRemaining(deadline).hours);
-console.log(getTimeRemaining(deadline).minutes);
-console.log(getTimeRemaining(deadline).seconds);
+//console.log(getTimeRemaining(deadline).total);
+//console.log(getTimeRemaining(deadline).days);
+//console.log(getTimeRemaining(deadline).hours);
+//console.log(getTimeRemaining(deadline).minutes);
+//console.log(getTimeRemaining(deadline).seconds);
 
 
 // When the client is ready, run this code (only once)
@@ -75,7 +71,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const { commandName } = interaction;
 
-	if (commandName === 'wen') {
+	if (commandName === 'wen xls-20') {
 		//await interaction.reply('589!');
         await interaction.reply({ content: `XLS-20 in ${(getTimeRemaining(deadline).days)} days, ${(getTimeRemaining(deadline).hours)} hours, ${(getTimeRemaining(deadline).minutes)} minutes, and ${(getTimeRemaining(deadline).seconds)} seconds!`});
     }
