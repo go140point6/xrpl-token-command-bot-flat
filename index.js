@@ -85,10 +85,10 @@ async function getPrices() {
                 console.log(inUSD);
             }
         }).catch(err => {
-            interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
+            //interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
         });
     } else {
-        interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
+        //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
     }
 };
 
@@ -128,8 +128,8 @@ client.on(Events.InteractionCreate, async interaction => {
     } else if (commandName === 'xrpl-token') {
         //await interaction.reply('589!');
         await getPrices();
-        //await interaction.reply("Current price: " + inUSD);
-        await interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+        await interaction.reply("Current price: " + inUSD);
+        //await interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
 	}
 });
 
