@@ -165,8 +165,10 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply('Boop.On!');
 	} else if (commandName === 'xrpl-token') {
         //await interaction.reply('589.On!');
+        const tokenX = async () => {
         xToken.UpdatePrice();
         await interaction.reply(`The current ASK is ${xToken.Ask} and the current BID is ${xToken.Bid}.`);
+        }
     }
 });
 
