@@ -45,8 +45,14 @@ const xrplToken = {
 };
 
 async function getXRP() {
-    return new Promise((resolve, reject) => {
-        await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple`).then(res => {
+    return new Promise((res, rej) => {
+        console.log("getXRP");
+        getXRPPrice();
+    })
+};
+
+async function getXRPPrice() {
+    await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple`).then(res => {
             if (res.data && res.data[0].current_price) {
                 //console.log("XRP is: " + res.data[0].current_price);
                 currentXRP = res.data[0].current_price.toFixed(4) || 0
@@ -55,10 +61,7 @@ async function getXRP() {
                 console.log("Error loading coin data")
             }
         })
-    })
-};
-
-
+}
 
 async function getPrices() {
     const result = await getXRP()
@@ -79,7 +82,8 @@ client.once(Events.ClientReady, c => {
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
 
-    getPrices();
+    //getPrices();
+    getXRP();
 
     const rest = new REST({ version: '10' }).setToken(token);
     
