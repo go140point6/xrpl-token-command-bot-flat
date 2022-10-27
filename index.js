@@ -84,9 +84,9 @@ const xrplToken = {
   };
 */
 
-async function getAskBid() {
+function getAskBid() {
     const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
-        await xrplClient.connect();
+        xrplClient.connect();
         const reqAsk = {
             "command": "book_offers",
             "taker_gets": {
