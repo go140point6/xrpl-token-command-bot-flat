@@ -129,7 +129,7 @@ client.on(Events.InteractionCreate, async interaction => {
         //await interaction.reply('589!');
         await getPrices();
         //await interaction.reply("Current price: " + inUSD);
-        interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+        await interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
 	}
 });
 
