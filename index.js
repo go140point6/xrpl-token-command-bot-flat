@@ -165,6 +165,11 @@ client.once(Events.ClientReady, c => {
         xToken.UpdatePrice();
     }
     console.log(priceUpdate);
+    console.log("UpdatePrice");
+    console.log("Bid " + Bid);
+    console.log("Ask " + Ask);
+    console.log("Bid " + xToken.Bid);
+    console.log("Ask " + xToken.Ask);
 
     rest.put(
         Routes.applicationGuildCommands(
