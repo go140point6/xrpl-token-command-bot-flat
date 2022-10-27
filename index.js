@@ -8,6 +8,13 @@ const axios = require('axios');
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+const xrplTokens = [
+    { currency: 'BANANA', issuer: 'r3KSyXmYTYd6wd6ZwtrbEhQMjnJW3xpK4j'},
+    { currency: 'CLUB', issuer: 'r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4'},
+    { currency: 'PHX', issuer: 'rfEJ1ksD22TsCy8hdKoJuC6Xfc33VCKPUs'},
+    { currency: 'XBAE', issuer: 'rGc7CTU22AbPg8drYWTYsdGVk6nfssSPBK'}
+  ]
+
 const ping = {
     data: new SlashCommandBuilder()
         .setName('ping')
@@ -26,10 +33,24 @@ const beep = {
     },
 };
 
+const xrplToken = {
+    data: new SlashCommandBuilder()
+        .setName('xrpl-token')
+        .setDescription('Last trade in USD'),
+    async execute(interaction) {
+        await interaction.reply('Boop!');
+    },
+};
+
+async function getXRP() {
+    await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=xrp`).then(res => {
+        console.log("XRP is: " + res.data[0].current_price);
+    })
+};
+
 async function getPrices() {
     await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
         console.log(res.data);
-        //console.log(res.data[0].last);
         console.log(res.data.pairs[0].last);
     })
 };
