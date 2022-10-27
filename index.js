@@ -49,7 +49,7 @@ async function getXRP() {
                if (res.data && res.data[0].current_price) {
                 //console.log("XRP is: " + res.data[0].current_price);
                 currentXRP = res.data[0].current_price.toFixed(4) || 0
-                console.log("Inside function: " + currentXRP);
+                //console.log("Inside function: " + currentXRP);
             } else {
                 console.log("Error loading coin data")
             }
@@ -58,12 +58,12 @@ async function getXRP() {
 }
 
 async function getPrices() {
-    await getXRP()
-    console.log("Outside function: " + currentXRP);
-    //await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
-    //    console.log(res.data);
-    //    console.log(res.data.pairs[0].last);
-    //})
+    await getXRP();
+    console.log("XRP Price: " + currentXRP);
+    await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
+        console.log(res.data);
+        console.log(res.data.pairs[0].last);
+    })
 };
 
 // When the client is ready, run this code (only once)
@@ -77,7 +77,6 @@ client.once(Events.ClientReady, c => {
     //console.log(commandData);
 
     getPrices();
-    console.log("In client.once: " + currentXRP);
 
     const rest = new REST({ version: '10' }).setToken(token);
     
