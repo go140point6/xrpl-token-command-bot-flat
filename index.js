@@ -145,7 +145,7 @@ client.once(Events.ClientReady, c => {
 
     const rest = new REST({ version: '10' }).setToken(token);
 
-    await xToken.UpdatePrice();
+    xToken.UpdatePrice();
     
     rest.put(
         Routes.applicationGuildCommands(
