@@ -3,6 +3,7 @@ const { Client, Events, GatewayIntentBits, SlashCommandBuilder } = require('disc
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const { token, clientId, guildId } = require('./config.json');
+const { axios } = require('axios');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -25,6 +26,12 @@ const beep = {
     },
 };
 
+async function getPrices() {
+    await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
+        console.log(res);
+    })
+};
+
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
@@ -34,6 +41,8 @@ client.once(Events.ClientReady, c => {
 
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
+
+    getPrices();
 
     const rest = new REST({ version: '10' }).setToken(token);
     
