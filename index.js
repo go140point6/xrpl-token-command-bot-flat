@@ -155,6 +155,8 @@ client.once(Events.ClientReady, c => {
 	    .catch(console.error);
     }); 
 
+    await xToken.UpdatePrice();
+    
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
