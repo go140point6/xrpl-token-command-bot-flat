@@ -29,7 +29,7 @@ const beep = {
 async function getPrices() {
     await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
         console.log(res.data);
-        console.log(res.data[0].last);
+        //console.log(res.data[0].last);
         console.log(res.data.pairs[0].last);
     })
 };
