@@ -153,10 +153,12 @@ client.once(Events.ClientReady, c => {
         { body: commandData }
         ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	    .catch(console.error);
+
+        await xToken.UpdatePrice();
     }); 
 
-    await xToken.UpdatePrice();
     
+
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
