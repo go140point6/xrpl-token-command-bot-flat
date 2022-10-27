@@ -77,6 +77,7 @@ client.once(Events.ClientReady, c => {
     //console.log(commandData);
 
     getPrices();
+    console.log("In client.once: " + currentXRP);
 
     const rest = new REST({ version: '10' }).setToken(token);
     
