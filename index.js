@@ -146,6 +146,7 @@ client.on(Events.InteractionCreate, async interaction => {
                     //console.log(res.data);
                     //console.log(res.data.pairs[0].last);
                     const inXRP = res.data.pairs[0].last;
+                    console.log(inXRP);
                     inUSD = (inXRP * currentXRP).toFixed(4);
                     console.log(inUSD);
                     interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
