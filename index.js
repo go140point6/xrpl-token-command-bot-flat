@@ -44,10 +44,11 @@ const xrplToken = {
     },
 };
 
-async function getXRP() {
+function getXRP() {
     return new Promise((res, rej) => {
         console.log("getXRP");
         getXRPPrice();
+        res();
     })
 };
 
