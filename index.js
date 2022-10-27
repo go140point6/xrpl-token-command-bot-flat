@@ -65,6 +65,7 @@ client.once(Events.ClientReady, c => {
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
 
+    getXRP();
     getPrices();
 
     const rest = new REST({ version: '10' }).setToken(token);
