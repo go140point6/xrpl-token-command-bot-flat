@@ -73,9 +73,10 @@ client.once(Events.ClientReady, c => {
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
 
-    getXRP();
-    console.log("Outside function: " + currentXRP);
-    getPrices();
+    const getPrices = async () => {
+        const result = await getXRP()
+        console.log("Outside function: " + currentXRP);
+    }
 
     const rest = new REST({ version: '10' }).setToken(token);
     
