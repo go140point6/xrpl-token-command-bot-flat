@@ -43,7 +43,7 @@ const xrplToken = {
 };
 
 async function getXRP() {
-    await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=xrp`).then(res => {
+    await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=ripple`).then(res => {
         console.log("XRP is: " + res.data[0].current_price);
     })
 };
