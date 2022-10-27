@@ -7,29 +7,52 @@ const { token, clientId, guildId } = require('./config.json');
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-const ping = {
+const wen = {
     data: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong!'),
+        .setName('wen')
+        .setDescription('Countdown timer to xls-20 on the XRPL!'),
     async execute(interaction) {
-        await interaction.reply('Pong!');
+        await interaction.reply('589!');
     },
 };
 
-const beep = {
-    data: new SlashCommandBuilder()
-        .setName('beep')
-        .setDescription('Replies with Boop!'),
-    async execute(interaction) {
-        await interaction.reply('Boop!');
-    },
-};
+const deadline = 'Oct 31 2022 08:41:41 UTC';
+var remDays;
+var remHours;
+var remMinutes;
+var remSeconds;
+
+console.log(deadline);
+
+function getTimeRemaining(endtime) {
+  const total = Date.parse(endtime) - Date.parse(new Date());
+  const seconds = Math.floor( (total/1000) % 60 );
+  const minutes = Math.floor( (total/1000/60) % 60 );
+  const hours = Math.floor( (total/(1000*60*60)) % 24 );
+  const days = Math.floor( total/(1000*60*60*24) );
+
+  return {
+    total,
+    days,
+    hours,
+    minutes,
+    seconds
+  };
+}
+
+
+console.log(getTimeRemaining(deadline).total);
+console.log(getTimeRemaining(deadline).days);
+console.log(getTimeRemaining(deadline).hours);
+console.log(getTimeRemaining(deadline).minutes);
+console.log(getTimeRemaining(deadline).seconds);
+
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-    const command = [ping, beep];
+    const command = [wen];
     //console.log(command);
 
     const commandData = command.map((command) => command.data.toJSON());
@@ -52,11 +75,11 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const { commandName } = interaction;
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'beep') {
-		await interaction.reply('Boop!');
-	}
+	if (commandName === 'wen') {
+		//await interaction.reply('589!');
+        getTimeRemaining(endtime)
+        await interaction.reply({ content: `XLS-20 in ${(getTimeRemaining(deadline).days)} days, ${(getTimeRemaining(deadline).hours)} hours, ${(getTimeRemaining(deadline).minutes)} minutes, and ${(getTimeRemaining(deadline).seconds)} seconds!`});
+    }
 });
 
 // Log in to Discord with your client's token
