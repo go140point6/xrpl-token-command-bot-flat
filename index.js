@@ -66,7 +66,7 @@ async function getXRP() {
 
 async function getPrices() {
     await getXRP();
-    console.log("XRP Price: " + currentXRP);
+    //console.log("XRP Price: " + currentXRP);
     /*
     const ticker = (interaction.options.getString("ticker", true));
     let tic = xrplTokens.find(t => t.currency === ticker);
@@ -137,7 +137,7 @@ client.on(Events.InteractionCreate, async interaction => {
             //console.log(tic.currency);
             //console.log(tic.issuer);
         } else {
-            console.log("meatbag");
+            //console.log("meatbag");
         }
         
         if (tic !== undefined) {
@@ -148,10 +148,10 @@ client.on(Events.InteractionCreate, async interaction => {
                     //console.log(res.data);
                     //console.log(res.data.pairs[0].last);
                     const inXRP = res.data.pairs[0].last;
-                    console.log(inXRP);
+                    //console.log(inXRP);
                     inUSD = (inXRP * currentXRP).toFixed(4);
-                    console.log(inUSD);
-                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                    //console.log(inUSD);
+                    interaction.reply({ content: `Current price of ${ticker} is USD $${inUSD}` });
                 }
             }).catch(err => {
                 interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
