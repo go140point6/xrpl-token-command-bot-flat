@@ -110,7 +110,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
         //await interaction.reply('589!');
-        getPrices();
+        await getPrices();
         await interaction.reply("Current price: " + inUSD);
 	}
 });
