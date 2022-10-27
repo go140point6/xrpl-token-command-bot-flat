@@ -64,34 +64,8 @@ async function getXRP() {
         })
 }
 
-async function getPrices() {
+async function getXRPToken() {
     await getXRP();
-    //console.log("XRP Price: " + currentXRP);
-    /*
-    const ticker = (interaction.options.getString("ticker", true));
-    let tic = xrplTokens.find(t => t.currency === ticker);
-    if (tic !== undefined) {
-        console.log(tic.currency);
-    } else {
-        console.log("meatbag");
-    }
-
-    if (tic !== undefined) {
-        await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
-            if(res.data && res.data[0].last) {
-                //console.log(res.data);
-                //console.log(res.data.pairs[0].last);
-                const inXRP = res.data.pairs[0].last;
-                inUSD = (inXRP * currentXRP).toFixed(4);
-                console.log(inUSD);
-            }
-        }).catch(err => {
-            //interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
-        });
-    } else {
-        //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
-    }
-    */
 };
 
 // When the client is ready, run this code (only once)
@@ -129,7 +103,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
         //await interaction.reply('589!');
-        await getPrices();
+        await getXRPToken();
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         //console.log(ticker);
         let tic = xrplTokens.find(t => t.currency === ticker);
@@ -151,7 +125,7 @@ client.on(Events.InteractionCreate, async interaction => {
                     //console.log(inXRP);
                     inUSD = (inXRP * currentXRP).toFixed(4);
                     //console.log(inUSD);
-                    interaction.reply({ content: `Current price of ${ticker} is USD $${inUSD}` });
+                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
                 interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
