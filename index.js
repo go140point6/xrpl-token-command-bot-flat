@@ -72,7 +72,7 @@ client.once(Events.ClientReady, c => {
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
 
-    getXRP();
+    getXRP(currentXRP);
     console.log("XRP is: " + currentXRP);
     getPrices();
 
