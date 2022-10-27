@@ -67,6 +67,7 @@ async function getXRP() {
 async function getPrices() {
     await getXRP();
     console.log("XRP Price: " + currentXRP);
+    /*
     const ticker = (interaction.options.getString("ticker", true));
     let tic = xrplTokens.find(t => t.currency === ticker);
     if (tic !== undefined) {
@@ -90,6 +91,7 @@ async function getPrices() {
     } else {
         //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
     }
+    */
 };
 
 // When the client is ready, run this code (only once)
