@@ -60,9 +60,12 @@ async function getXRP() {
 async function getPrices() {
     await getXRP();
     console.log("XRP Price: " + currentXRP);
-    await axios.get(`https://api.onthedex.live/public/v1/ticker/CSC.rCSCManTZ8ME9EoLrSHHYKW8PPwWMgkwr:XRP`).then(res => {
-        console.log(res.data);
-        console.log(res.data.pairs[0].last);
+    await axios.get(`https://api.onthedex.live/public/v1/ticker/CLUB.r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4:XRP`).then(res => {
+        //console.log(res.data);
+        //console.log(res.data.pairs[0].last);
+        const inXRP = res.data.pairs[0].last;
+        const inUSD = (inXRP * currentXRP).toFixed(4);
+        console.log(inUSD);
     })
 };
 
