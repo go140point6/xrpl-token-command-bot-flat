@@ -135,6 +135,7 @@ client.on(Events.InteractionCreate, async interaction => {
         let tic = xrplTokens.find(t => t.currency === ticker);
         if (tic !== undefined) {
             console.log(tic.currency);
+            console.log(tic.issuer);
         } else {
             console.log("meatbag");
         }
