@@ -71,7 +71,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const { commandName } = interaction;
 
-	if (commandName === 'wen xls-20') {
+	if (commandName === 'wen xls20') {
 		//await interaction.reply('589!');
         await interaction.reply({ content: `XLS-20 in ${(getTimeRemaining(deadline).days)} days, ${(getTimeRemaining(deadline).hours)} hours, ${(getTimeRemaining(deadline).minutes)} minutes, and ${(getTimeRemaining(deadline).seconds)} seconds!`});
     }
