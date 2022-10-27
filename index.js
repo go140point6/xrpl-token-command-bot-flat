@@ -3,7 +3,7 @@ const { Client, Events, GatewayIntentBits, SlashCommandBuilder } = require('disc
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const { token, clientId, guildId } = require('./config.json');
-const { axios } = require('axios');
+const axios = require('axios');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
