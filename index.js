@@ -85,7 +85,16 @@ const xrplToken = {
 */
 
 async function getAskBid() {
-    console.log("getAskBid");
+    //console.log("getAskBid");
+    const xToken = {
+        Bid: 0,
+        Ask: 0,
+        UpdatePrice: async function() {
+            console.log("UpdatePrice");
+            console.log("Bid " + Bid);
+            console.log("Ask " + Ask);
+        }
+    }
 };
 
 /*
