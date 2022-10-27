@@ -85,6 +85,7 @@ const xrplToken = {
 */
 
 async function getAskBid() {
+    return new Promise(resolve => {
     const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
         xrplClient.connect();
         const reqAsk = {
@@ -121,6 +122,7 @@ async function getAskBid() {
         console.log(Bid);
 
         xrplClient.disconnect();
+        })
 };
 
 
