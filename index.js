@@ -38,6 +38,8 @@ const xrplToken = {
         ),
     async execute(interaction) {
         await interaction.reply('589!');
+    },
+};
         /*
               const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
               await xrplClient.connect();
@@ -76,9 +78,59 @@ const xrplToken = {
               await interaction.reply(`The current ASK is ${xrplToken.Ask} and the current BID is ${xrplToken.Bid}.`);
           
               xrplClient.disconnect();
-              */
+             
       },
   };
+*/
+
+const xToken = {
+    Bid: 0,
+    Ask: 0,
+    UpdatePrice: async function () {
+    try{
+        const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
+        await xrplClient.connect();
+        const reqAsk = {
+            "command": "book_offers",
+            "taker_gets": {
+            "currency": "434C554200000000000000000000000000000000",
+            "issuer": "r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4"
+            },
+            "taker_pays": {
+            "currency": "XRP"
+            },
+            "limit": 1
+        }
+
+        const reqBid = {
+            "command": "book_offers",
+            "taker_gets": {
+                "currency": "XRP"
+            },
+            "taker_pays": {
+            "currency": "434C554200000000000000000000000000000000",
+            "issuer": "r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4"
+            },
+            "limit": 1
+        }
+
+        const responseAsk = await xrplClient.request(reqAsk);
+        const responseBid = await xrplClient.request(reqBid);
+        var ask = responseAsk.result.offers;
+        var bid = responseBid.result.offers;
+        xToken.Ask = parseFloat(ask[0].quality / 1000000).toFixed(2);
+        xToken.Bid = parseFloat((1 / (bid[0].quality * 1000000))).toFixed(2);
+        console.log(xToken.Ask);
+        console.log(xToken.Bid);
+
+        xrplClient.disconnect();
+    } catch
+    {
+        token.Ask = 1;
+        token.Bid = 1;
+    }
+}
+}
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
@@ -113,43 +165,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply('Boop.On!');
 	} else if (commandName === 'xrpl-token') {
         //await interaction.reply('589.On!');
-        const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
-        await xrplClient.connect();
-        const reqAsk = {
-            "command": "book_offers",
-            "taker_gets": {
-            "currency": "434C554200000000000000000000000000000000",
-            "issuer": "r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4"
-            },
-            "taker_pays": {
-            "currency": "XRP"
-            },
-            "limit": 1
-        }
-
-        const reqBid = {
-            "command": "book_offers",
-            "taker_gets": {
-                "currency": "XRP"
-            },
-            "taker_pays": {
-            "currency": "434C554200000000000000000000000000000000",
-            "issuer": "r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4"
-            },
-            "limit": 1
-        }
-
-        const responseAsk = await xrplClient.request(reqAsk);
-        const responseBid = await xrplClient.request(reqBid);
-        var ask = responseAsk.result.offers;
-        var bid = responseBid.result.offers;
-        xrplToken.Ask = parseFloat(ask[0].quality / 1000000).toFixed(2);
-        xrplToken.Bid = parseFloat((1 / (bid[0].quality * 1000000))).toFixed(2);
-        console.log(xrplToken.Ask);
-        console.log(xrplToken.Bid);
-        await interaction.reply(`The current ASK is ${xrplToken.Ask} and the current BID is ${xrplToken.Bid}.`);
-    
-        xrplClient.disconnect();
+        await interaction.reply(`The current ASK is ${xToken.Ask} and the current BID is ${xToken.Bid}.`);
     }
 });
 
