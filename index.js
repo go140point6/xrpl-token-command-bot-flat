@@ -40,7 +40,7 @@ const xrplToken = {
         .setName('xrpl-token')
         .setDescription('Last trade in USD'),
     async execute(interaction) {
-        await interaction.reply('Boop!');
+        await interaction.reply('589!');
     },
 };
 
@@ -73,13 +73,13 @@ async function getPrices() {
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
-    const command = [ping, beep];
+    const command = [ping, beep, xrplToken];
     //console.log(command);
 
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
 
-    getPrices();
+    //getPrices();
 
     const rest = new REST({ version: '10' }).setToken(token);
     
