@@ -144,6 +144,8 @@ client.once(Events.ClientReady, c => {
     console.log(commandData);
 
     const rest = new REST({ version: '10' }).setToken(token);
+
+    await xToken.UpdatePrice();
     
     rest.put(
         Routes.applicationGuildCommands(
@@ -154,7 +156,6 @@ client.once(Events.ClientReady, c => {
         ).then(data => console.log(`Successfully registered ${data.length} application commands.`))
 	    .catch(console.error);
 
-        await xToken.UpdatePrice();
     }); 
 
     
