@@ -141,6 +141,8 @@ client.on(Events.InteractionCreate, async interaction => {
         }
         
         if (tic !== undefined) {
+            console.log(tic.currency);
+            console.log(tic.issuer);
             await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
                 if(res.data && res.data[0].last) {
                     //console.log(res.data);
