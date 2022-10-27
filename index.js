@@ -144,7 +144,7 @@ client.on(Events.InteractionCreate, async interaction => {
             //console.log(tic.currency);
             //console.log(tic.issuer);
             await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
-                if(res.data && res.data.airs[0].last) {
+                if(res.data && res.data.pairs[0].last) {
                     //console.log(res.data);
                     //console.log(res.data.pairs[0].last);
                     const inXRP = res.data.pairs[0].last;
@@ -154,8 +154,7 @@ client.on(Events.InteractionCreate, async interaction => {
                     interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
-                //interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
-                interaction.reply({ content: err})
+                interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
             });
         } else {
             interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
