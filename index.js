@@ -102,6 +102,8 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply('Pong!');
 	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
+    } else if (commandName === 'xrpl-token') {
+        await interaction.reply('589!');
 	}
 });
 
