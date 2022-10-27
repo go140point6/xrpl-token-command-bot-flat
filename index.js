@@ -161,7 +161,9 @@ client.once(Events.ClientReady, c => {
     const rest = new REST({ version: '10' }).setToken(token);
 
     getAskBid();
-    xToken.UpdatePrice();
+    const priceUpdate = async() => {
+        xToken.UpdatePrice();
+    }
     
     rest.put(
         Routes.applicationGuildCommands(
