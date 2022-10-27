@@ -9,6 +9,7 @@ const axios = require('axios');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 var inUSD = 0;
+var currency;
 
 const xrplTokens = [
     { currency: 'BANANA', issuer: 'r3KSyXmYTYd6wd6ZwtrbEhQMjnJW3xpK4j'},
@@ -42,7 +43,7 @@ const xrplToken = {
         .addStringOption((option) =>
             option
                 .setName("ticker")
-                .setDescription("Common ticker of XRPL Token to lookup i.e. CLUB.")
+                .setDescription("Common ticker (currency) of XRPL Token to lookup i.e. CLUB.")
                 .setRequired(true)
         ),
     async execute(interaction) {
@@ -66,13 +67,30 @@ async function getXRP() {
 async function getPrices() {
     await getXRP();
     console.log("XRP Price: " + currentXRP);
-    await axios.get(`https://api.onthedex.live/public/v1/ticker/CLUB.r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4:XRP`).then(res => {
-        //console.log(res.data);
-        //console.log(res.data.pairs[0].last);
-        const inXRP = res.data.pairs[0].last;
-        inUSD = (inXRP * currentXRP).toFixed(4);
-        console.log(inUSD);
-    })
+    const ticker = (interaction.options.getString("ticker", true));
+    let tic = xrplTokens.find(t => t.currency === ticker);
+    if (tic !== undefined) {
+        console.log(tic.currency);
+    } else {
+        console.log("meatbag");
+    }
+
+    if (tic !== undefined) {
+        await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
+            if(res.data && res.data[0].last) {
+                //console.log(res.data);
+                //console.log(res.data.pairs[0].last);
+                const inXRP = res.data.pairs[0].last;
+                inUSD = (inXRP * currentXRP).toFixed(4);
+                console.log(inUSD);
+                interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+            }
+        }).catch(err => {
+            interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
+        });
+    } else {
+        interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
+    }
 };
 
 // When the client is ready, run this code (only once)
@@ -111,7 +129,7 @@ client.on(Events.InteractionCreate, async interaction => {
     } else if (commandName === 'xrpl-token') {
         //await interaction.reply('589!');
         await getPrices();
-        await interaction.reply("Current price: " + inUSD);
+        //await interaction.reply("Current price: " + inUSD);
 	}
 });
 
