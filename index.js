@@ -148,7 +148,7 @@ client.on(Events.InteractionCreate, async interaction => {
                     const inXRP = res.data.pairs[0].last;
                     inUSD = (inXRP * currentXRP).toFixed(4);
                     console.log(inUSD);
-                    await interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
                 interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
