@@ -9,7 +9,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const wen = {
     data: new SlashCommandBuilder()
-        .setName('wen xls20')
+        .setName('wen-xls20')
         .setDescription('Countdown timer to xls-20 on the XRPL!'),
     async execute(interaction) {
         await interaction.reply('589!');
@@ -71,7 +71,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const { commandName } = interaction;
 
-	if (commandName === 'wen xls20') {
+	if (commandName === 'wen-xls20') {
 		//await interaction.reply('589!');
         await interaction.reply({ content: `XLS-20 in ${(getTimeRemaining(deadline).days)} days, ${(getTimeRemaining(deadline).hours)} hours, ${(getTimeRemaining(deadline).minutes)} minutes, and ${(getTimeRemaining(deadline).seconds)} seconds!`});
     }
