@@ -84,7 +84,7 @@ const xrplToken = {
   };
 */
 
-function getAskBid() {
+async function getAskBid() {
     const xrplClient = new xrpl.Client('wss://xrplcluster.com');  
         xrplClient.connect();
         const reqAsk = {
