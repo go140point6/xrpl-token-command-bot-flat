@@ -37,6 +37,7 @@ const xrplToken = {
                 .setRequired(true)
         ),
     async execute(interaction) {
+        await interaction.deferReply();
         await interaction.reply('589!');
     },
 };
