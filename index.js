@@ -84,6 +84,7 @@ client.once(Events.ClientReady, c => {
 
     //getPrices();
     getXRP();
+    console.log("Outside function: " + currentXRP);
 
     const rest = new REST({ version: '10' }).setToken(token);
     
