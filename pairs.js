@@ -5,7 +5,7 @@ async function getPairs() {
         this.data = res.data;
         //console.log(this.data);
 
-        res.forEach(item => console.log(item));
+        Array.from(res).forEach(item => console.log(item));
         
 /*         data.forEach((pair) => {
             console.log(pair)
