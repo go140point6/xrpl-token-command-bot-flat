@@ -1,9 +1,9 @@
 const axios = require('axios');
 
 function getPairs() {
-    return axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(res => {
+    return axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(function (res) => {
         return res;
-    })
+    });
 }
 
 var item = [];
