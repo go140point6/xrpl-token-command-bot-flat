@@ -1,9 +1,11 @@
 const axios = require('axios');
 
 async function getPairs() {
-    const res = await axios.get(`https://api.onthedex.live/public/v1/daily/tokens`);
-    console.log(res.data);
-}
+    await axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(res => {
+        console.log(res.data);
+    })
+};
+
     
         //this.data = res.data;
         //let test = Array.isArray(this.data);
