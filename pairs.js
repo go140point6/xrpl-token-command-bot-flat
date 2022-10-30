@@ -1,17 +1,14 @@
 const axios = require('axios');
 
 function getPairs() {
-    return axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(function (res) {
-        return res;
+    axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(res => {
+        this.ready({data: res.data});
     });
 }
 
-var item = [];
-var response = getPairs().then(function (res) {
-    item.push(res.data[1]);
-});
+console.log(this.ready);
 
-console.log(item);
+
 
         //this.data = res.data;
         //let test = Array.isArray(this.data);
