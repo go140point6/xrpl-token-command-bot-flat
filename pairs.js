@@ -3,9 +3,9 @@ const axios = require('axios');
 async function getPairs() {
     await axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(res => {
         this.data = res.data;
-        console.log(this.data);
+        //console.log(this.data);
 
-        res.array.forEach(item => console.log(item));
+        res.data.forEach(item => console.log(item));
         
 /*         data.forEach((pair) => {
             console.log(pair)
