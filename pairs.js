@@ -2,11 +2,11 @@ const axios = require('axios');
 
 function getPairs() {
     axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(res => {
-        this.ready({data: res.data});
+        console.log(res);
     });
 }
 
-console.log(this.ready);
+
 
 
 
