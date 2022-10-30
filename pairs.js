@@ -1,10 +1,10 @@
 const axios = require('axios');
 
 async function getPairs() {
-    //await axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(res => {
-    let responseJson = await axios.get(`https://api.onthedex.live/public/v1/daily/tokens`)
-    return responseJson;
-    console.log(responseJson);
+    const res = await axios.get(`https://api.onthedex.live/public/v1/daily/tokens`);
+    console.log(res.data);
+}
+    
         //this.data = res.data;
         //let test = Array.isArray(this.data);
         //console.log(test);
@@ -18,6 +18,6 @@ async function getPairs() {
             console.log(pair.issuer);
         });
 */        //})
-};
+//};
 
 getPairs();
