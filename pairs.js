@@ -22,7 +22,7 @@ function createTables(newdb) {
             currency text not null
         );
     `, () => {
-        getPairs();
+        console.log("DB and Table created");
     });
 }
 
