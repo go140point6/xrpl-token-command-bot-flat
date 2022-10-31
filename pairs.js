@@ -2,8 +2,9 @@ const axios = require('axios');
 
 async function getPairs() {
     await axios.get(`https://api.onthedex.live/public/v1/daily/tokens`).then(res => {
-        //console.log(res.data);
-        console.log(res.data[0].currency);
+        console.log(res.data);
+        console.log(res.data.tokens);
+        console.log(res.data.tokens[0].currency);
     });
 }
 
