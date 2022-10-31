@@ -58,6 +58,8 @@ async function getPairs() {
 
 //getPairs();
 
+db.close();
+
 
 //console.log(tokens.length);
 
