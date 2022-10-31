@@ -10,7 +10,8 @@ async function getPairs() {
         allTokens = res.data.tokens.forEach((element) => {
             console.log(element);
         })
-        console.log(allTokens.length);
+        let length = allTokens.length;
+        console.log(length);
     });
 }
 
