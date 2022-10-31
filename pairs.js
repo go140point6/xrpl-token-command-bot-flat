@@ -5,7 +5,7 @@ async function getPairs() {
         //console.log(res.data);
         //console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
-        res.forEach((element) => {
+        res.data.tokens.forEach((element) => {
             console.log(element);
         })
     });
