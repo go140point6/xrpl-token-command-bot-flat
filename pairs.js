@@ -3,14 +3,16 @@ const sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./data/tokens.db', (err) => {
     console.log(err);
-    //if (err && err.code == "SQLITE_CANTOPEN") {
-    //    createDatabase();
-    //    return;
-    //} else if (err) {
-    //    console.log("Getting error " + err);
+    if (err && err.code == "SQLITE_CANTOPEN") {
+        console.log("before createDB");
+        createDatabase();
+        return;
+    } else if (err) {
+        console.log("Getting error " + err);
         exit(1);
-    //}
-    //getPairs();
+    }
+    console.log("before getPairs")
+    getPairs();
 });
 
 function createDatabase() {
