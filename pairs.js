@@ -8,9 +8,12 @@ async function getPairs() {
         //console.log(res.data);
         //console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
+        let count = 0;
         allTokens = res.data.tokens.forEach((element) => {
             console.log(element.currency + " and " + element.issuer);
+            count++;
         })
+        console.log(count);
         //let length = allTokens.length;
         //console.log(length);
     });
