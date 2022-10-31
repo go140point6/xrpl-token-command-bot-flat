@@ -2,16 +2,7 @@ const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./data/tokens.db', (err) => {
-    if (err && err.code == "SQLITE_CANTOPEN") {
-        console.log("before createDB");
         createDatabase();
-        return;
-    } else if (err) {
-        console.log("Getting error " + err);
-        exit(1);
-    }
-    console.log("before getPairs")
-    getPairs();
 });
 
 function createDatabase() {
