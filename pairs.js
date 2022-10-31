@@ -5,20 +5,13 @@ async function getPairs() {
         //console.log(res.data);
         //console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
+        res.forEach((element) => {
+            console.log(element);
+        })
     });
 }
 
-async function showPairs() {
-    await getPairs();
-    res.forEach((element) => {
-        console.log(element);
-    })
-    //tokens.forEach((element) => {
-    //    console.log(element);
-    //})
-}
-
-showPairs();
+getPairs();
 
 //console.log(tokens.length);
 
