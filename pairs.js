@@ -2,8 +2,8 @@ const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./data/tokens.db', (err) => {
-        //createDatabase();
-        getPairs();
+        createDatabase();
+        //getPairs();
 });
 
 function createDatabase() {
