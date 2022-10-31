@@ -9,7 +9,7 @@ let db = new sqlite3.Database('./data/tokens.db', (err) => {
         console.log("Getting error " + err);
         exit(1);
     }
-    runQueries(db);
+    getPairs();
 });
 
 function createDatabase() {
