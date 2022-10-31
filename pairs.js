@@ -4,7 +4,7 @@ var allTokens;
 
 async function getPairs() {
     //await axios.get(`https://api.onthedex.live/public/v1/daily/tokens?by=trades`).then(res => {
-    await axios.get(`https://api.onthedex.live/public/v1/aggregator/tokens`).then(res => {
+    await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         console.log(res.data);
         //console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
