@@ -10,7 +10,7 @@ async function getPairs() {
 
 getPairs();
 
-console.log(tokens.length);
+//console.log(tokens.length);
 
 
 tokens.forEach((element) => {
