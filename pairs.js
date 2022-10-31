@@ -37,14 +37,15 @@ async function getPairs() {
         const allTokens = res.data.tokens.forEach((element) => {
             count++;
             var sql = "INSERT INTO tokens(issuer,currency) VALUES(?,?)";
-            console.log(sql);
+            //console.log(sql);
             var params = [element.issuer, element.currency];
-            console.log(params);
-            db.run(sql, params, (err, rows) => {
+            //console.log(params);
+            db.run(sql, params, function(err) {
+                console.log(element.issuer);
                 if (err) {
                     console.log("Error when adding token: ", err.message);
                 }
-                console.log("inserted ", rows);
+                console.log(`inserted: ${this.lastID}`);
             });
             //console.log(element.currency + " and " + element.issuer);
             //count++;
