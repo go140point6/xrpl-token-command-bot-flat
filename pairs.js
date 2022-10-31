@@ -10,9 +10,10 @@ async function getPairs() {
 
 async function showPairs() {
     await getPairs();
-    tokens.forEach((element) => {
-        console.log(element);
-    })
+    console.log(tokens);
+    //tokens.forEach((element) => {
+    //    console.log(element);
+    //})
 }
 
 showPairs();
