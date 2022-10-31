@@ -15,6 +15,8 @@ async function showPairs() {
     })
 }
 
+showPairs();
+
 //console.log(tokens.length);
 
         //this.data = res.data;
