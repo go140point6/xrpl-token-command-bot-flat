@@ -1,6 +1,37 @@
 const axios = require('axios');
+const sqlite3 = require('sqlite3').verbose();
 
-//var allTokens;
+let db = new sqlite3.Database('./data/tokens.db', (err) => {
+    if (err && err.code == "SQLITE_CANTOPEN") {
+        createDatabase();
+        return;
+    } else if (err) {
+        console.log("Getting error " + err);
+        exit(1);
+    }
+    runQueries(db);
+});
+
+function createDatabase() {
+    var newdb = new sqlite3.Database('./data/tokens.db', (err) => {
+        if (err) {
+            console.log("Getting error " + err);
+            exit(1);
+        }
+        createTables(newdb);
+    });
+}
+
+function createTables(newdb) {
+    newdb.exec(`
+        create table tokens (
+            issuer int primary key not null,
+            currency text not null
+        );
+    `, () => {
+        getPairs();
+    });
+}
 
 async function getPairs() {
     //await axios.get(`https://api.onthedex.live/public/v1/daily/tokens?by=trades`).then(res => {
@@ -19,7 +50,7 @@ async function getPairs() {
     });
 }
 
-getPairs();
+//getPairs();
 
 
 //console.log(tokens.length);
