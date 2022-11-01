@@ -47,7 +47,7 @@ async function getPairs() {
                     console.log("Error when adding token: ", err.message);
                 }
                 //console.log(`inserted: ${this.lastID}`);
-                console.log(`${element.issuer}","${element.currency}`);
+                console.log(`${element.issuer},${element.currency}`);
             });
             //console.log(element.currency + " and " + element.issuer);
             //count++;
