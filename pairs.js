@@ -2,8 +2,8 @@ const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./data/tokens.db', (err) => {
-        //createDatabase();
-        getPairs();
+        createDatabase();
+        //getPairs();
 });
 
 function createDatabase() {
@@ -35,11 +35,12 @@ async function getPairs() {
         //console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
         let count = 0;
+        let id = 0;
         const allTokens = res.data.tokens.forEach((element) => {
             count++;
+            id++;
             var sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
             //console.log(sql);
-            var id = 1;
             var params = [id, element.issuer, element.currency];
             //console.log(params);
             db.run(sql, params, function(err) {
@@ -52,7 +53,6 @@ async function getPairs() {
             });
             //console.log(element.currency + " and " + element.issuer);
             //count++;
-            id++;
         })
         console.log(count);
         //let length = allTokens.length;
