@@ -114,11 +114,11 @@ client.on(Events.InteractionCreate, async interaction => {
         //let tic = xrplTokens.find(t => t.currency === ticker);
 
         //var sql = ("SELECT  FROM tokens WHERE currency = " + ticker);
-        console.log(sql)
         db.all(`SELECT currency, issuer FROM tokens WHERE currency=${ticker}`, 
-        (error, rows) => {rows.forEach((row) => {
-            console.log(row.currency + " " + row.issuer);
-        })
+        //db.all(sql)
+        //(error, rows) => {rows.forEach((row) => {
+        //    console.log(row.currency + " " + row.issuer);
+        //})
     });
     /*
         if (tic !== undefined) {
