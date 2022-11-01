@@ -114,9 +114,7 @@ client.on(Events.InteractionCreate, async interaction => {
         //let tic = xrplTokens.find(t => t.currency === ticker);
 
         var sql = "SELECT  FROM tokens WHERE currency = " + ticker;
-        db.all("SELECT currency, issuer FROM tokens WHERE currency=$symbol", {
-            $symbol: 'CLUB'
-        },
+        db.all(`SELECT currency, issuer FROM tokens WHERE currency=${ticker}`, 
         (error, rows) => {rows.forEach((row) => {
             console.log(row.currency + " " + row.issuer);
         })
