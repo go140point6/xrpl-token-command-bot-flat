@@ -39,6 +39,7 @@ async function getPairs() {
             count++;
             var sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
             //console.log(sql);
+            var rowid = 1;
             var params = [rowid, element.issuer, element.currency];
             //console.log(params);
             db.run(sql, params, function(err) {
