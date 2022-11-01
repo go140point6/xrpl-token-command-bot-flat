@@ -2,8 +2,8 @@ const axios = require('axios');
 const sqlite3 = require('sqlite3').verbose();
 
 let db = new sqlite3.Database('./data/tokens.db', (err) => {
-        //createDatabase();
-        getPairs();
+        createDatabase();
+        //getPairs();
 });
 
 function createDatabase() {
@@ -19,8 +19,9 @@ function createDatabase() {
 function createTables(newdb) {
     newdb.exec(`
         create table tokens (
-            issuer int primary key not null,
-            currency text not null
+            id int primary key not null,
+            currency text not null,
+            issuer text not null
         );
     `, () => {
         console.log("DB and Table created");
@@ -36,16 +37,17 @@ async function getPairs() {
         let count = 0;
         const allTokens = res.data.tokens.forEach((element) => {
             count++;
-            var sql = "INSERT INTO tokens(issuer,currency) VALUES(?,?)";
+            var sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
             //console.log(sql);
             var params = [element.issuer, element.currency];
             //console.log(params);
             db.run(sql, params, function(err) {
-                console.log(element.issuer);
+                //console.log(element.issuer);
                 if (err) {
                     console.log("Error when adding token: ", err.message);
                 }
-                console.log(`inserted: ${this.lastID}`);
+                //console.log(`inserted: ${this.lastID}`);
+                console.log(`${element.issuer}","${element.currency}`);
             });
             //console.log(element.currency + " and " + element.issuer);
             //count++;
