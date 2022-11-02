@@ -4,12 +4,13 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const { token, clientId, guildId } = require('./config.json');
 const axios = require('axios');
-const sqlite3 = require('sqlite3').verbose();
+const sqlite3 = require('better-sqlite3');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-let db = new sqlite3.Database('./data/tokens.db');
+//let db = new sqlite3.Database('./data/tokens.db');
+let db = new Database('./data/tokens.db');
 
 var inUSD = 0;
 var currency;
@@ -113,14 +114,18 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(ticker);
         //let tic = xrplTokens.find(t => t.currency === ticker);
 
-        var sql = (`SELECT currency, issuer FROM tokens WHERE currency = ${ticker}`);
-        console.log(sql);
-        //db.all(`SELECT currency, issuer FROM tokens WHERE currency=${ticker}`, 
+        const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
+        console.log(row.currency, row.issuer);
+    }
+});
+        //var sql = (`SELECT currency, issuer FROM tokens WHERE currency = ${ticker}`);
+        //console.log(sql);
+        //db.all(sql, 
         //db.all(sql)
-        //(error, rows) => {rows.forEach((row) => {
+        //,(error, rows) => {rows.forEach((row) => {
         //    console.log(row.currency + " " + row.issuer);
-        }
-    });
+        //}
+    //});
     /*
         if (tic !== undefined) {
             //console.log(tic.currency);
