@@ -64,7 +64,7 @@ async function getXRPToken() {
     await getXRP();
 };
 
-function getRows() {
+function getRows(ticker) {
     const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
     console.log(row.currency, row.issuer);
 };
