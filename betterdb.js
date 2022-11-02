@@ -104,7 +104,8 @@ client.on(Events.InteractionCreate, async interaction => {
         await getXRPToken();
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         
-        getRows();    
+        const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
+        console.log(row.currency, row.issuer);  
     }
 });
 
