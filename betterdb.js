@@ -102,12 +102,47 @@ client.on(Events.InteractionCreate, async interaction => {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
         await getXRPToken();
+        console.log(currentXRP);
+
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         
-        const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
-        console.log(row.currency, row.issuer);  
+        //const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
+        //console.log(row.currency, row.issuer);  
+
+        db.prepare('SELECT * FROM tokens').then(function(rows) {
+            rows.forEach(function (row) {
+                console.log(row);
+            });
+        }).catch(function(err) {
+            console.error(err);
+        });
     }
 });
+
+/*
+const allTokens = res.data.tokens.forEach((element) => {
+    count++;
+    id++;
+    var sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
+    //console.log(sql);
+    var params = [id, element.issuer, element.currency];
+    //console.log(params);
+    db.run(sql, params, function(err) {
+        //console.log(element.issuer);
+        if (err) {
+            console.log("Error when adding token: ", err.message);
+        }
+        //console.log(`inserted: ${this.lastID}`);
+        console.log(`${id},${element.issuer},${element.currency}`);
+    });
+    //console.log(element.currency + " and " + element.issuer);
+    //count++;
+})
+console.log(count);
+//let length = allTokens.length;
+//console.log(length);
+});
+*/
 
 // Log in to Discord with your client's token
 client.login(token);
