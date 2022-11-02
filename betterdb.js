@@ -101,12 +101,11 @@ client.on(Events.InteractionCreate, async interaction => {
 
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         
-        //const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
+        const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
         //console.log(row.currency, row.issuer);  
 
         //const allRows = db.prepare(`SELECT * FROM tokens`).run();
-        const allRows = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = CLUB');
-        console.log(allRows.currency, allRows.issuer);
+        console.log(rows.currency, rows.issuer);
     }
 });
 
