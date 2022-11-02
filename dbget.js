@@ -10,7 +10,7 @@ const sqlite3 = require('better-sqlite3');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 //let db = new sqlite3.Database('./data/tokens.db');
-let db = new better-sqlite3.Database('./data/tokens.db');
+let db = new sqlite3.Database('./data/tokens.db');
 
 var inUSD = 0;
 var currency;
