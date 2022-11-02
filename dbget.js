@@ -113,12 +113,13 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(ticker);
         //let tic = xrplTokens.find(t => t.currency === ticker);
 
-        //var sql = ("SELECT  FROM tokens WHERE currency = " + ticker);
-        db.all(`SELECT currency, issuer FROM tokens WHERE currency=${ticker}`, 
+        var sql = ("SELECT  FROM tokens WHERE currency = " + ticker);
+        console.log(sql);
+        //db.all(`SELECT currency, issuer FROM tokens WHERE currency=${ticker}`, 
         //db.all(sql)
         //(error, rows) => {rows.forEach((row) => {
         //    console.log(row.currency + " " + row.issuer);
-        //})
+        }
     });
     /*
         if (tic !== undefined) {
@@ -147,8 +148,8 @@ client.on(Events.InteractionCreate, async interaction => {
         } else {
             interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
         }*/
-	}
-});
+	//}
+//});
 
 // Log in to Discord with your client's token
 client.login(token);
