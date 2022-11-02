@@ -109,13 +109,8 @@ client.on(Events.InteractionCreate, async interaction => {
         //const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
         //console.log(row.currency, row.issuer);  
 
-        db.prepare('SELECT * FROM tokens').then(function(rows) {
-            rows.forEach(function (row) {
-                console.log(row);
-            });
-        }).catch(function(err) {
-            console.error(err);
-        });
+        const allRows = db.prepare(`SELECT * FROM tokens`).run();
+        console.low(allRows);
     }
 });
 
