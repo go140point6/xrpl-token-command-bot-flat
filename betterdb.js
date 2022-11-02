@@ -110,7 +110,7 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(row.currency, row.issuer);  
 
         const allRows = db.prepare(`SELECT * FROM tokens`).run();
-        console.low(allRows);
+        console.log(allRows);
     }
 });
 
