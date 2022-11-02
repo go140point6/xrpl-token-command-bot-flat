@@ -4,13 +4,13 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const { token, clientId, guildId } = require('./config.json');
 const axios = require('axios');
-const sqlite3 = require('better-sqlite3');
+const Database = require('better-sqlite3');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 //let db = new sqlite3.Database('./data/tokens.db');
-let db = new sqlite3.Database('./data/tokens.db');
+const db = new Database('./data/tokens.db', { verbose: console.log });
 
 var inUSD = 0;
 var currency;
