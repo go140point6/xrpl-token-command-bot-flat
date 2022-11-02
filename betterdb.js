@@ -64,11 +64,6 @@ async function getXRPToken() {
     await getXRP();
 };
 
-function getRows(ticker) {
-    const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
-    console.log(row.currency, row.issuer);
-};
-
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
 client.once(Events.ClientReady, c => {
@@ -111,7 +106,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
         //const allRows = db.prepare(`SELECT * FROM tokens`).run();
         const allRows = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = CLUB');
-        console.log(allRows);
+        console.log(allRows.currency, allRows.issuer);
     }
 });
 
