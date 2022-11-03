@@ -143,99 +143,16 @@ client.on(Events.InteractionCreate, async interaction => {
                     inUSD = (inXRP * currentXRP).toFixed(6);
                     interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
-            })
+            }).catch(err => {
+                interaction.reply({ content: `Some error with api call, please try again or ping an admin.`})
+            });
         } else if (Array.isArray(results5) && results5.length > 1) {
             interaction.reply({ content: `Found more than one ${ticker} in database and the meatbag didn't program me for that yet.` });
         } else {
             interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
         }
-        
-        /*
-        if (Array.isArray(results5) && results5.length == 1) {
-            //console.log("Array exists and has exactly 1 item");
-            await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
-            //    if(res.data && res.data.pairs[0].last) {
-            //        //console.log(res.data);
-            //        //console.log(res.data.pairs[0].last);
-            //        const inXRP = res.data.pairs[0].last;
-            //        //console.log(inXRP);
-            //        inUSD = (inXRP * currentXRP).toFixed(4);
-            //        //console.log(inUSD);
-            //        interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
-
-        } else if (Array.isArray(results5) && results5.length > 1) {
-            console.log("Array exists but has more than one item");
-        } else {
-            console.log("Array either doesn't exist or is empty");
-            //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
-*/
-
-
-
-
-/*
-        let tic = xrplTokens.find(t => t.currency === ticker);
-        if (tic !== undefined) {
-            //console.log(tic.currency);
-            //console.log(tic.issuer);
-        } else {
-            //console.log("meatbag");
-        }
-        
-        if (tic !== undefined) {
-            //console.log(tic.currency);
-            //console.log(tic.issuer);
-            await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
-                if(res.data && res.data.pairs[0].last) {
-                    //console.log(res.data);
-                    //console.log(res.data.pairs[0].last);
-                    const inXRP = res.data.pairs[0].last;
-                    //console.log(inXRP);
-                    inUSD = (inXRP * currentXRP).toFixed(4);
-                    //console.log(inUSD);
-                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
-                }
-            }).catch(err => {
-                interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
-            });
-        } else {
-            interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
-        }
-	}
-});
-*/
-
-
-
-
-
     }
 });
-
-/*
-const allTokens = res.data.tokens.forEach((element) => {
-    count++;
-    id++;
-    var sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
-    //console.log(sql);
-    var params = [id, element.issuer, element.currency];
-    //console.log(params);
-    db.run(sql, params, function(err) {
-        //console.log(element.issuer);
-        if (err) {
-            console.log("Error when adding token: ", err.message);
-        }
-        //console.log(`inserted: ${this.lastID}`);
-        console.log(`${id},${element.issuer},${element.currency}`);
-    });
-    //console.log(element.currency + " and " + element.issuer);
-    //count++;
-})
-console.log(count);
-//let length = allTokens.length;
-//console.log(length);
-});
-*/
 
 // Log in to Discord with your client's token
 client.login(token);
