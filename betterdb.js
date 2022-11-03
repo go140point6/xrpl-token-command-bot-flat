@@ -142,6 +142,10 @@ client.on(Events.InteractionCreate, async interaction => {
                     const inXRP = res.data.pairs[0].last;
                     inUSD = (inXRP * currentXRP).toFixed(4);
                     interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                } else if (Array.isArray(results5) && results5.length > 1) {
+                    interaction.reply({ content: `Found more than one ${ticker} in database and the meatbag didn't program me for that yet.` });
+                } else {
+                    interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
                 }
             })
         }
