@@ -23,8 +23,10 @@ function createDatabase() {
 };
 
 async function getTokens() {
-    let sql = `SELECT EXISTS (SELECT 1 FROM ${tableName}`;
+    let sql = `SELECT EXISTS (SELECT 1 FROM ${tableName})`;
     console.log(sql);
+    db.run(sql);
+    
     /*
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         //console.log(res.data);
