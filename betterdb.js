@@ -120,8 +120,8 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(results4);  
 
         const stmt5 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
-        var results5 = stmt5.all(ticker);
-        results5.then(res => {
+        var results5 = stmt5.all(ticker)
+        .then(res => {
             console.log(res.currency);
             console.log(res.issuer);
         })
