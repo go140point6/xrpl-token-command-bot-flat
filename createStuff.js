@@ -1,6 +1,6 @@
 const axios = require('axios');
 const Database = require('better-sqlite3');
-const initialDB = require('sqlite3');
+const sqlite3 = require('sqlite3');
 const fs = require('fs')
 
 const path = './data/tokens.db';
@@ -8,7 +8,7 @@ const path = './data/tokens.db';
 const tableName = "tokens";
 
 function createDatabase() {
-    var newdb = new sqlite3.initialDB('./data/tokens.db', (err) => {
+    var newdb = new sqlite3.Database('./data/tokens.db', (err) => {
         if (err) {
             console.log("Getting error " + err);
             exit(1);
