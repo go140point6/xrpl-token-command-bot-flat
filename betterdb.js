@@ -104,7 +104,9 @@ client.on(Events.InteractionCreate, async interaction => {
         //const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
         //console.log(row.currency, row.issuer);  
 
-        const allRows = db.prepare(`SELECT * FROM tokens`).run();
+        const stmt = db.prepare("SELECT * FROM tokens");
+        var results = stmt.all();
+        console.log(results);
     }
 });
 
