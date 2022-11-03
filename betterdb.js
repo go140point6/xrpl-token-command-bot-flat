@@ -95,6 +95,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
+        await interaction.deferReply();
         await getXRPToken();
         console.log(currentXRP);
 
@@ -140,15 +141,15 @@ client.on(Events.InteractionCreate, async interaction => {
                 if(res.data && res.data.pairs[0].last) {
                     const inXRP = res.data.pairs[0].last;
                     inUSD = (inXRP * currentXRP).toFixed(6);
-                    interaction.deferReply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                    interaction.({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
-                interaction.reply({ content: `Some error with api call, please try again or ping an admin.`})
+                interaction.editReply({ content: `Some error with api call, please try again or ping an admin.`})
             });
         } else if (Array.isArray(results5) && results5.length > 1) {
-            interaction.reply({ content: `Found more than one ${ticker} in database and the meatbag didn't program me for that yet.` });
+            interaction.editReply({ content: `Found more than one ${ticker} in database and the meatbag didn't program me for that yet.` });
         } else {
-            interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
+            interaction.editReply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
         }
     }
 });
