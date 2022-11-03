@@ -130,12 +130,12 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(results5);
         //console.log(results5[0].currency);
         //results5.forEach(element => console.log(element));
-        results5.forEach(element => console.log(element.currency));
-        results5.forEach(element => console.log(element.issuer))
+        //results5.forEach(element => console.log(element.currency));
+        //results5.forEach(element => console.log(element.issuer))
 
         if (Array.isArray(results5) && results5.length == 1) {
-            console.log("Array exists and has exactly 1 item");
-            //await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
+            //console.log("Array exists and has exactly 1 item");
+            await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
             //    if(res.data && res.data.pairs[0].last) {
             //        //console.log(res.data);
             //        //console.log(res.data.pairs[0].last);
@@ -150,6 +150,8 @@ client.on(Events.InteractionCreate, async interaction => {
             console.log("Array either doesn't exist or is empty");
             //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
         }
+    }
+
 /*
         let tic = xrplTokens.find(t => t.currency === ticker);
         if (tic !== undefined) {
