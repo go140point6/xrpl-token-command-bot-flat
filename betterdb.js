@@ -141,10 +141,10 @@ client.on(Events.InteractionCreate, async interaction => {
                 if(res.data && res.data.pairs[0].last) {
                     const inXRP = res.data.pairs[0].last;
                     inUSD = (inXRP * currentXRP).toFixed(6);
-                    interaction.({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                    interaction.editReply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
-                interaction.editReply({ content: `Some error with api call, please try again or ping an admin.`})
+                interaction.editReply({ content: `Some error with api call, please try again or ping an admin.`});
             });
         } else if (Array.isArray(results5) && results5.length > 1) {
             interaction.editReply({ content: `Found more than one ${ticker} in database and the meatbag didn't program me for that yet.` });
