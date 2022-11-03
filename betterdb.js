@@ -95,9 +95,9 @@ client.on(Events.InteractionCreate, async interaction => {
 	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
+        await interaction.deferReply();
         await getXRPToken();
         console.log(currentXRP);
-        await interaction.deferReply();
 
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         
