@@ -8,6 +8,7 @@ const Database = require('better-sqlite3');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const db = new Database('./data/tokens.db');
 
 var inUSD = 0;
 var currency;
@@ -150,6 +151,7 @@ client.on(Events.InteractionCreate, async interaction => {
             interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
         }
     }
+    db.close();
 });
 
 // Log in to Discord with your client's token
