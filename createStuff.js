@@ -43,8 +43,8 @@ async function getTokens() {
             //console.log(sql);
             var params = [id, element.currency, element.issuer];
             //console.log(params);
-            db.run(sql, params, function(err) {
-                const stmt6 = db.prepare("SELECT * FROM tokens");
+            sqlite3.Database.run(sql, params, function(err) {
+                const stmt6 = sqlite3.Database.prepare("SELECT * FROM tokens");
                 var results = stmt6.all();
                 console.log(results);
                 if (err) {
