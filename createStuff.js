@@ -63,4 +63,4 @@ async function allTokens() {
     }
 };
 
-await allTokens();
+allTokens();
