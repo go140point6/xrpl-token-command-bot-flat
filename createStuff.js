@@ -24,19 +24,19 @@ async function getTokens() {
         const theTokens = res.data.tokens.forEach((element) => {
             count++;
             id++;
-            let sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
+            let sql = "INSERT INTO tokens(id,currency,issuer) VALUES(?,?,?)";
             //console.log(sql);
-            var params = [id, element.issuer, element.currency];
+            var params = [id, element.currency, element.issuer];
             //console.log(params);
             db.prepare(sql, params, function(err) {
                 //console.log(element.issuer);
                 if (err) {
                     console.log("Error when adding token: ", err.message);
                 }
-                //console.log(`inserted: ${this.lastID}`);
-                console.log(`${id},${element.issuer},${element.currency}`);
+                console.log(`inserted: ${this.lastID}`);
+                console.log(`${id},${element.currency},${element.issuer}`);
             });
-            //console.log(element.currency + " and " + element.issuer);
+            console.log(element.currency + " and " + element.issuer);
             //count++;
         })
         console.log(count);
