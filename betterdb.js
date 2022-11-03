@@ -129,7 +129,9 @@ client.on(Events.InteractionCreate, async interaction => {
         console.log("Number in array: " + results5.length);
         //console.log(results5);
         //console.log(results5[0].currency);
-        results5.forEach(element => console.log(element));
+        //results5.forEach(element => console.log(element));
+        results5.forEach(element => console.log(element.currency));
+        results5.forEach(element => console.log(element.issuer));
 /*
         console.log(currency);
         console.log(issuer);
