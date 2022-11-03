@@ -8,8 +8,8 @@ const tableName = "tokens";
 let db;
 
 function createTable() {
-    let fields = "(id INT PRIMARY KEY NOT NULL, currency TEXT, issuer TEXT)";
-    let sql = `CREATE TABLE IF NOT EXISTS  ${tableName} ${fields}`;
+    let fields = "(currency TEXT, issuer TEXT)";
+    let sql = `CREATE TABLE IF NOT EXISTS ${tableName} ${fields}`;
     let makeTable = db.prepare(sql);
     makeTable.run();
 };
