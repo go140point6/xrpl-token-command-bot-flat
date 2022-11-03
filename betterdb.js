@@ -18,15 +18,16 @@ getTokens();
 function createTable() {
     let fields = "(id INT PRIMARY KEY NOT NULL, currency TEXT, issuer TEXT)";
     let sql = `CREATE TABLE IF NOT EXISTS  ${tableName} ${fields}`;
-    let createTable = db.prepare(sql);
-    createTable.run();
+    let makeTable = db.prepare(sql);
+    makeTable.run();
 };
 
 async function getTokens() {
     let sql = `SELECT EXISTS (SELECT 1 FROM ${tableName})`;
     console.log(sql);
-    let getTokens = db.prepare(sql);
-    getTokens.run();
+    let grabTokens = db.prepare(sql);
+    grabTokens.run();
+    console.log(grabTokens);
 
     /*
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
