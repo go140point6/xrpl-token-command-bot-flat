@@ -130,30 +130,26 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(results5);
         //console.log(results5[0].currency);
         //results5.forEach(element => console.log(element));
-        let currency = results5.forEach(element => console.log(element.currency));
-        let issuer = results5.forEach(element => console.log(element.issuer));
+        results5.forEach(element => console.log(element.currency));
+        results5.forEach(element => console.log(element.issuer))
 
-        console.log(currency);
-        console.log(issuer);
-/*
-        if (Array.isArray(results5) && results5.length) {
-            //console.log("Array exists and has at least 1 item");
-            await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
-                if(res.data && res.data.pairs[0].last) {
-                    //console.log(res.data);
-                    //console.log(res.data.pairs[0].last);
-                    const inXRP = res.data.pairs[0].last;
-                    //console.log(inXRP);
-                    inUSD = (inXRP * currentXRP).toFixed(4);
-                    //console.log(inUSD);
-                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+        if (Array.isArray(results5) && results5.length == 1) {
+            console.log("Array exists and has exactly 1 item");
+            //await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
+            //    if(res.data && res.data.pairs[0].last) {
+            //        //console.log(res.data);
+            //        //console.log(res.data.pairs[0].last);
+            //        const inXRP = res.data.pairs[0].last;
+            //        //console.log(inXRP);
+            //        inUSD = (inXRP * currentXRP).toFixed(4);
+            //        //console.log(inUSD);
+            //        interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+        } else if (Array.isArray(results5) && results5.length > 1) {
+            console.log("Array exists but has more than one item");
         } else {
-            //console.log("Array either doesn't exist or is empty");
-            interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
+            console.log("Array either doesn't exist or is empty");
+            //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
         }
-    })
-        }
-*/
 /*
         let tic = xrplTokens.find(t => t.currency === ticker);
         if (tic !== undefined) {
