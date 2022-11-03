@@ -4,8 +4,11 @@ const sqlite3 = require('sqlite3');
 const fs = require('fs')
 
 const path = './data/tokens.db';
-//const db = new Database('./data/tokens.db');
 const tableName = "tokens";
+
+let db = new sqlite3.Database('./data/tokens.db', (err) => {
+    createDatabase();
+});
 
 function createDatabase() {
     var newdb = new sqlite3.Database('./data/tokens.db', (err) => {
@@ -19,13 +22,14 @@ function createDatabase() {
 
 function createTables(newdb) {
     newdb.exec(`
-        create table tokens (
+        create table if not exists tokens (
             id int primary key not null,
             currency text not null,
             issuer text not null
         );
     `, () => {
         console.log("DB and Table created");
+        getTokens();
     });
 }
 
@@ -72,14 +76,11 @@ async function allTokens() {
             console.log("db exists, so getMoreTokens");
             db = new Database('./data/tokens.db');
             await getMoreTokens()
-        } else {
-            console.log("db doesn't exist, so create it, the table and get initial token list");
-            createDatabase();
-            getTokens();
-        }
+        } 
     } catch(err) {
         console.log("some error", err);
     }
 };
 
 allTokens();
+
