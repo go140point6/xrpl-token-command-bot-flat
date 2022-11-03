@@ -13,19 +13,6 @@ function createTable() {
     makeTable.run();
 };
 
-async function allTokens() {
-    try {
-        if (fs.existsSync(path)) {
-            const db = new Database('./data/tokens.db');
-            getMoreTokens()
-        }
-    } catch(err) {
-        const db = new Database('./data/tokens.db');
-        createTable();
-        getTokens();
-    }
-};
-
 async function getTokens() {
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         //console.log(res.data);
@@ -61,4 +48,19 @@ async function getMoreTokens() {
     console.log("Time to get more tokens");
 }
 
-allTokens();
+async function allTokens() {
+    try {
+        if (fs.existsSync(path)) {
+            console.log("db exists, so getMoreTokens");
+            const db = new Database('./data/tokens.db');
+            await getMoreTokens()
+        }
+    } catch(err) {
+        console.log("db doesn't exist, so create it, the table and get initial token list");
+        const db = new Database('./data/tokens.db');
+        createTable();
+        getTokens();
+    }
+};
+
+await allTokens();
