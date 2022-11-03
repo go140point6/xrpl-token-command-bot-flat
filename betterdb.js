@@ -101,9 +101,6 @@ client.on(Events.InteractionCreate, async interaction => {
 
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         
-        //const row = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?').get(ticker);
-        //console.log(row.currency, row.issuer);  
-
         //const stmt = db.prepare("SELECT * FROM tokens");
         //var results = stmt.all();
         //console.log(results);
@@ -112,11 +109,15 @@ client.on(Events.InteractionCreate, async interaction => {
         //var results2 = stmt2.all("USD");
         //console.log(results2);
 
-        const stmt3 = db.prepare("SELECT * FROM tokens");
-        var results3 = stmt3.all().map(item => {
-            return Object.values(item).join();
-        });
-        console.log(results3);
+        //const stmt3 = db.prepare("SELECT * FROM tokens");
+        //var results3 = stmt3.all().map(item => {
+        //    return Object.values(item).join();
+        //});
+        //console.log(results3);
+
+        const stmt4 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?');
+        var results4 = stmt4.all(ticker);
+        console.log(results4);  
     }
 });
 
