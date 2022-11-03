@@ -7,6 +7,7 @@ const path = './data/tokens.db';
 const tableName = "tokens";
 
 let db = new sqlite3.Database('./data/tokens.db', (err) => {
+    console.log("createDatabase");
     createDatabase();
 });
 
@@ -16,6 +17,7 @@ function createDatabase() {
             console.log("Getting error " + err);
             exit(1);
         }
+        console.log("createTables");
         createTables(newdb);
     });
 }
@@ -29,6 +31,7 @@ function createTables(newdb) {
         );
     `, () => {
         console.log("DB and Table created");
+        console.log("getTokens");
         getTokens();
     });
 }
@@ -47,8 +50,8 @@ async function getTokens() {
             //console.log(sql);
             var params = [id, element.currency, element.issuer];
             //console.log(params);
-            sqlite3.Database.run(sql, params, function(err) {
-                const stmt6 = sqlite3.Database.prepare("SELECT * FROM tokens");
+            db.run(sql, params, function(err) {
+                const stmt6 = db.prepare("SELECT * FROM tokens");
                 var results = stmt6.all();
                 console.log(results);
                 if (err) {
