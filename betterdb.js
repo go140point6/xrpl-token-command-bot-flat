@@ -11,11 +11,11 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const tableName = "tokens";
 const db = new Database('./data/tokens.db');
-createDatabase();
+createTable();
 getTokens();
 //getMoreTokens();
 
-function createDatabase() {
+function createTable() {
     let fields = "(id INT PRIMARY KEY NOT NULL, currency TEXT, issuer TEXT)";
     let sql = `CREATE TABLE IF NOT EXISTS  ${tableName} ${fields}`;
     let createTable = db.prepare(sql);
@@ -25,8 +25,9 @@ function createDatabase() {
 async function getTokens() {
     let sql = `SELECT EXISTS (SELECT 1 FROM ${tableName})`;
     console.log(sql);
-    db.run(sql);
-    
+    let getTokens = db.prepare(sql);
+    getTokens.run();
+
     /*
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         //console.log(res.data);
