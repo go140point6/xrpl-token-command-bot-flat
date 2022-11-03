@@ -133,7 +133,7 @@ client.on(Events.InteractionCreate, async interaction => {
         //results5.forEach(element => console.log(element.currency));
         //results5.forEach(element => console.log(element.issuer))
 
-        if (Array.isArray(results5) && results5.lenth == 1) {
+        if (Array.isArray(results5) && results5.length == 1) {
             console.log("Array exists and has exactly 1 item");
         }
         /*
