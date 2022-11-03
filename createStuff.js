@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = './data/tokens.db';
 //const db = new Database('./data/tokens.db');
 const tableName = "tokens";
+let db;
 
 function createTable() {
     let fields = "(id INT PRIMARY KEY NOT NULL, currency TEXT, issuer TEXT)";
@@ -52,11 +53,11 @@ async function allTokens() {
     try {
         if (fs.existsSync(path)) {
             console.log("db exists, so getMoreTokens");
-            const db = new Database('./data/tokens.db');
+            db = new Database('./data/tokens.db');
             await getMoreTokens()
         } else {
             console.log("db doesn't exist, so create it, the table and get initial token list");
-            const db = new Database('./data/tokens.db');
+            db = new Database('./data/tokens.db');
             createTable();
             getTokens();
         }
