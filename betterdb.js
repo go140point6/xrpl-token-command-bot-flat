@@ -57,7 +57,7 @@ async function getXRP() {
             }
             return;
         })
-}
+};
 
 async function getXRPToken() {
     await getXRP();

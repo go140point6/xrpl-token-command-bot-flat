@@ -1,8 +1,10 @@
-const tableName = "tokens";
+const axios = require('axios');
+const Database = require('better-sqlite3');
+const fs = require('fs')
+
+const path = './data/tokens.db';
 const db = new Database('./data/tokens.db');
-createTable();
-getTokens();
-//getMoreTokens();
+const tableName = "tokens";
 
 function createTable() {
     let fields = "(id INT PRIMARY KEY NOT NULL, currency TEXT, issuer TEXT)";
@@ -11,24 +13,28 @@ function createTable() {
     makeTable.run();
 };
 
-async function getTokens() {
-    let sql = `SELECT EXISTS (SELECT 1 FROM ${tableName})`;
-    console.log(sql);
-    let grabTokens = db.prepare(sql);
-    grabTokens.run();
-    console.log(grabTokens);
+async function allTokens() {
+    try {
+        if (fs.existsSync(path)) {
+            getMoreTokens()
+        }
+    } catch(err) {
+        createTable();
+        getTokens();
+    }
+};
 
-    /*
+async function getTokens() {
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         //console.log(res.data);
         //console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
         let count = 0;
         let id = 0;
-        const allTokens = res.data.tokens.forEach((element) => {
+        const theTokens = res.data.tokens.forEach((element) => {
             count++;
             id++;
-            var sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
+            let sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
             //console.log(sql);
             var params = [id, element.issuer, element.currency];
             //console.log(params);
@@ -46,5 +52,11 @@ async function getTokens() {
         console.log(count);
         //let length = allTokens.length;
         //console.log(length);
-    });*/
+    });
 }
+
+async function getMoreTokens() {
+    console.log("Time to get more tokens");
+}
+
+allTokens();
