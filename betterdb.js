@@ -95,7 +95,6 @@ client.on(Events.InteractionCreate, async interaction => {
 	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
-        await interaction.deferReply();
         await getXRPToken();
         console.log(currentXRP);
 
@@ -141,7 +140,7 @@ client.on(Events.InteractionCreate, async interaction => {
                 if(res.data && res.data.pairs[0].last) {
                     const inXRP = res.data.pairs[0].last;
                     inUSD = (inXRP * currentXRP).toFixed(6);
-                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                    interaction.deferReply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
                 interaction.reply({ content: `Some error with api call, please try again or ping an admin.`})
