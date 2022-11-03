@@ -128,6 +128,7 @@ client.on(Events.InteractionCreate, async interaction => {
         console.log("That is an array: " + arrayCheck);
         console.log("Number in array: " + results5.length);
         console.log(results5);
+        console.log(results5[0].currency);
 /*
         console.log(currency);
         console.log(issuer);
