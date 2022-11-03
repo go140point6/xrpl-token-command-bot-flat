@@ -26,7 +26,7 @@ async function getTokens() {
     let sql = `SELECT EXISTS (SELECT 1 FROM ${tableName})`;
     console.log(sql);
     let grabTokens = db.prepare(sql);
-    grabTokens.run();
+    grabTokens.all();
     console.log(grabTokens);
 
     /*
