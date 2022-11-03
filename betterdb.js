@@ -121,8 +121,10 @@ client.on(Events.InteractionCreate, async interaction => {
 
         const stmt5 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
         var results5 = stmt5.all(ticker);
-        var currency = stmt5.currency(ticker);
-        var issuer = stmt5.issuer(ticker);
+        results5.then(res => {
+            console.log(res.currency);
+            console.log(res.issuer);
+        })
         //var results5 = stmt5.all(ticker).map(item => {
         //    return Object.values(item).join();
         //});
@@ -130,6 +132,7 @@ client.on(Events.InteractionCreate, async interaction => {
         console.log("That is an array: " + arrayCheck);
         console.log("Number in array: " + results5.length);
         console.log(results5);
+/*
         console.log(currency);
         console.log(issuer);
 
@@ -150,6 +153,7 @@ client.on(Events.InteractionCreate, async interaction => {
         }
     })
         }
+*/
 /*
         let tic = xrplTokens.find(t => t.currency === ticker);
         if (tic !== undefined) {
