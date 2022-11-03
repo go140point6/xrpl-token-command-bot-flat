@@ -115,7 +115,7 @@ client.on(Events.InteractionCreate, async interaction => {
         //});
         //console.log(results3);
 
-        const stmt4 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ?');
+        const stmt4 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
         var results4 = stmt4.all(ticker);
         console.log(results4);  
     }
