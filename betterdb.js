@@ -88,7 +88,7 @@ client.once(Events.ClientReady, c => {
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
-	const { commandName } = interaction.deferReply();
+	const { commandName } = interaction;
 
 	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
@@ -97,6 +97,7 @@ client.on(Events.InteractionCreate, async interaction => {
     } else if (commandName === 'xrpl-token') {
         await getXRPToken();
         console.log(currentXRP);
+        await interaction.deferReply();
 
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         
