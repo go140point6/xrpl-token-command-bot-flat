@@ -133,6 +133,7 @@ client.on(Events.InteractionCreate, async interaction => {
         //results5.forEach(element => console.log(element.currency));
         //results5.forEach(element => console.log(element.issuer))
 
+        /*
         if (Array.isArray(results5) && results5.length == 1) {
             //console.log("Array exists and has exactly 1 item");
             await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
@@ -144,13 +145,16 @@ client.on(Events.InteractionCreate, async interaction => {
             //        inUSD = (inXRP * currentXRP).toFixed(4);
             //        //console.log(inUSD);
             //        interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+
         } else if (Array.isArray(results5) && results5.length > 1) {
             console.log("Array exists but has more than one item");
         } else {
             console.log("Array either doesn't exist or is empty");
             //interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
-        }
-    }
+*/
+
+
+
 
 /*
         let tic = xrplTokens.find(t => t.currency === ticker);
