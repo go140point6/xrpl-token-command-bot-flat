@@ -63,4 +63,5 @@ async function allTokens() {
     }
 };
 
+console.log(tableName);
 allTokens();
