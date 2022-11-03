@@ -134,7 +134,14 @@ client.on(Events.InteractionCreate, async interaction => {
         //results5.forEach(element => console.log(element.issuer))
 
         if (Array.isArray(results5) && results5.length == 1) {
-            console.log("Array exists and has exactly 1 item");
+            //console.log("Array exists and has exactly 1 item");
+            await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
+                if(res.data && res.data.pairs[0].last) {
+                    const inXRP = res.data.pairs[0].last;
+                    inUSD = (inXRP * currentXRP).toFixed(4);
+                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                }
+            })
         }
         /*
         if (Array.isArray(results5) && results5.length == 1) {
