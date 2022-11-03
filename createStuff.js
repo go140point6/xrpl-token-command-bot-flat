@@ -54,14 +54,15 @@ async function allTokens() {
             console.log("db exists, so getMoreTokens");
             const db = new Database('./data/tokens.db');
             await getMoreTokens()
+        } else {
+            console.log("db doesn't exist, so create it, the table and get initial token list");
+            const db = new Database('./data/tokens.db');
+            createTable();
+            getTokens();
         }
     } catch(err) {
-        console.log("db doesn't exist, so create it, the table and get initial token list");
-        const db = new Database('./data/tokens.db');
-        createTable();
-        getTokens();
+        console.log("some error", err);
     }
 };
 
-console.log(tableName);
 allTokens();
