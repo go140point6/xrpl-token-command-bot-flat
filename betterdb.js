@@ -11,6 +11,13 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const db = new Database('./data/tokens.db', { verbose: console.log });
 
+var tableName = "tokens";
+var fields = "(id INT PRIMARY KEY NOT NULL, currency TEXT, issuer TEXT)";
+var SQLquery = `CREATE TABLE IF NOT EXISTS  ${tableName} ${fields}`;
+console.log(SQLquery);
+const createTable = db.prepare(SQLquery);
+createTable.run();
+
 var inUSD = 0;
 var currency;
 
