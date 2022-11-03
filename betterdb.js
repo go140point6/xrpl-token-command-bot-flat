@@ -135,6 +135,8 @@ client.on(Events.InteractionCreate, async interaction => {
 
         if (Array.isArray(results5) && results5.length == 1) {
             //console.log("Array exists and has exactly 1 item");
+            let currency = results5[0].currency;
+            let issuer = results5[0].issuer;
             await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
                 if(res.data && res.data.pairs[0].last) {
                     const inXRP = res.data.pairs[0].last;
