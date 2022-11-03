@@ -88,6 +88,7 @@ client.once(Events.ClientReady, c => {
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
+    await interaction.deferReply();
 	const { commandName } = interaction;
 
 	if (commandName === 'ping') {
