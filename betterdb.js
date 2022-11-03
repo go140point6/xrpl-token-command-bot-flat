@@ -130,12 +130,12 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(results5);
         //console.log(results5[0].currency);
         //results5.forEach(element => console.log(element));
-        results5.forEach(element => console.log(element.currency));
-        results5.forEach(element => console.log(element.issuer));
-/*
+        let currency = results5.forEach(element => console.log(element.currency));
+        let issuer = results5.forEach(element => console.log(element.issuer));
+
         console.log(currency);
         console.log(issuer);
-
+/*
         if (Array.isArray(results5) && results5.length) {
             //console.log("Array exists and has at least 1 item");
             await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
