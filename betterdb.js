@@ -120,18 +120,18 @@ client.on(Events.InteractionCreate, async interaction => {
         //console.log(results4);  
 
         const stmt5 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
-        //var results5 = stmt5.all(ticker);
-        var results5 = stmt5.all(ticker).map(item => {
-            return Object.values(item).join();
-        });
+        var results5 = stmt5.all(ticker);
+        var currency = stmt5.currency(ticker);
+        var issuer = stmt5.issuer(ticker);
+        //var results5 = stmt5.all(ticker).map(item => {
+        //    return Object.values(item).join();
+        //});
         let arrayCheck = Array.isArray(results5);
         console.log("That is an array: " + arrayCheck);
         console.log("Number in array: " + results5.length);
         console.log(results5);
-        console.log(results5.currency);
-        console.log(results5.issuer);
-        let currency = results5.currency;
-        let issuer = results5.issuer;
+        console.log(currency);
+        console.log(issuer);
 
         if (Array.isArray(results5) && results5.length) {
             //console.log("Array exists and has at least 1 item");
