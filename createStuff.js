@@ -28,7 +28,7 @@ async function getTokens() {
             //console.log(sql);
             var params = [id, element.issuer, element.currency];
             //console.log(params);
-            db.run(sql, params, function(err) {
+            db.prepare(sql, params, function(err) {
                 //console.log(element.issuer);
                 if (err) {
                     console.log("Error when adding token: ", err.message);
