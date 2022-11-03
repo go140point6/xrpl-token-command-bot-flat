@@ -151,7 +151,6 @@ client.on(Events.InteractionCreate, async interaction => {
             interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
         }
     }
-    db.close();
 });
 
 // Log in to Discord with your client's token
