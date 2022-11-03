@@ -116,6 +116,7 @@ client.on(Events.InteractionCreate, async interaction => {
         var results3 = stmt3.all().map(item => {
             return Object.values(item).join();
         });
+        console.log(results3);
     }
 });
 
