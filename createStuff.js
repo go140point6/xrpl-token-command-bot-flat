@@ -8,8 +8,11 @@ const tableName = "tokens";
 let db;
 
 function createTable() {
+    console.log(tableName);
     let fields = "(currency TEXT, issuer TEXT)";
+    console.log(fields);
     let sql = `CREATE TABLE IF NOT EXISTS ${tableName} ${fields}`;
+    console.log(sql);
     let makeTable = db.prepare(sql);
     makeTable.run();
 };
@@ -20,16 +23,16 @@ async function getTokens() {
         //console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
         let count = 0;
-        let id = 0;
         const theTokens = res.data.tokens.forEach((element) => {
             count++;
-            id++;
-            let sql = "INSERT INTO tokens(currency,issuer) VALUES(?,?)";
-            //console.log(sql);
+            let sql = "INSERT INTO tokens VALUES (?,?)";
+            console.log(sql);
             var params = [element.currency, element.issuer];
-            //console.log(params);
+            console.log(params);
             db.prepare(sql, params, function(err) {
-                //console.log(element.issuer);
+                const stmt6 = db.prepare("SELECT * FROM tokens");
+                var results = stmt6.all();
+                console.log(results);
                 if (err) {
                     console.log("Error when adding token: ", err.message);
                 }
