@@ -10,11 +10,10 @@ const Database = require('better-sqlite3');
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 const tableName = "tokens";
-const db = new Database('./data/tokens.db', (err) => {
-    createDatabase();
-    getTokens();
-    getMoreTokens();
-});
+const db = new Database('./data/tokens.db');
+createDatabase();
+getTokens();
+//getMoreTokens();
 
 function createDatabase() {
     let fields = "(id INT PRIMARY KEY NOT NULL, currency TEXT, issuer TEXT)";
