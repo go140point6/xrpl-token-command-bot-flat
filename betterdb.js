@@ -115,9 +115,18 @@ client.on(Events.InteractionCreate, async interaction => {
         //});
         //console.log(results3);
 
-        const stmt4 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
-        var results4 = stmt4.all(ticker);
-        console.log(results4);  
+        //const stmt4 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
+        //var results4 = stmt4.all(ticker);
+        //console.log(results4);  
+
+        const stmt5 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
+        var results5 = stmt5.all(ticker).map(item => {
+            return Object.values(item).join();
+        });
+        let arrayCheck = Array.isArray(results5);
+        console.log("That is an array: " + arrayCheck);
+        console.log("Number in array: " + results5.length);
+        console.log(results5);
     }
 });
 
