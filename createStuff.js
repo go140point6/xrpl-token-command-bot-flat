@@ -3,7 +3,7 @@ const Database = require('better-sqlite3');
 const fs = require('fs')
 
 const path = './data/tokens.db';
-const db = new Database('./data/tokens.db');
+//const db = new Database('./data/tokens.db');
 const tableName = "tokens";
 
 function createTable() {
@@ -16,9 +16,11 @@ function createTable() {
 async function allTokens() {
     try {
         if (fs.existsSync(path)) {
+            const db = new Database('./data/tokens.db');
             getMoreTokens()
         }
     } catch(err) {
+        const db = new Database('./data/tokens.db');
         createTable();
         getTokens();
     }
