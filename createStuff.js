@@ -7,7 +7,7 @@ const tableName = "tokens";
 
 function createTables() {
     console.log(tableName);
-    let fields = "(currency TEXT, issuer TEXT)";
+    let fields = "(id PRIMARY KEY, currency TEXT, issuer TEXT)";
     console.log(fields);
     let sql = `CREATE TABLE IF NOT EXISTS ${tableName} ${fields}`;
     console.log(sql);
