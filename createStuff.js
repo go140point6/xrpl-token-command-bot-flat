@@ -1,24 +1,26 @@
 const axios = require('axios');
 const Database = require('better-sqlite3');
-const fs = require('fs')
 
-const path = './data/tokens.db';
-const tableName = "tokens";
+const db = new Database('./data/tokens.db', {verbose: console.log });
 
-function createTables() {
-    console.log(tableName);
-    let fields = "(id PRIMARY KEY, currency TEXT, issuer TEXT)";
-    console.log(fields);
-    let sql = `CREATE TABLE IF NOT EXISTS ${tableName} ${fields}`;
-    console.log(sql);
-    let makeTable = db.prepare(sql);
-    makeTable.run();
-}
+var tableName = "tokens";
+var fields = "(id PRIMARY KEY, currency TEXT, issuer TEXT)";
+var sql1 = `CREATE TABLE IF NOT EXISTS ${tableName} ${fields}`;
+const createTable = db.prepare(sql1);
+createTable.run();
 
-const needTokens = async () => {
+axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
+    console.log(res.data.tokens);
+});
+/*
+var insertQuery = "INSERT INTO tokens VALUES (?,?,?)";
+db.prepare(insertQuery).run(id, currency, issuer);
+const stmt = db.prepare("SELECT * FROM tokens");
+var results = stmt.all();
+console.log(results);
+*/
 
-}
-
+/*
 async function getTokens() {
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         //console.log(res.data);
@@ -68,7 +70,7 @@ async function getTokens() {
 
 async function getMoreTokens() {
     //console.log("Time to get more tokens");
-    let sql = "SELECT * FROM tokens";
+    let jojo = db.prepare"SELECT * FROM tokens";
     db.prepare(sql);
 }
 
@@ -91,3 +93,4 @@ async function allTokens() {
 
 allTokens();
 
+*/
