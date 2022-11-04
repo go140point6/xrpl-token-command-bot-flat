@@ -19,9 +19,8 @@ async function getTokens() {
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         //console.log(res.data);
         //console.log(res.data.tokens);
-        console.log(res.data.tokens[0].currency);
-        console.log(res.data.tokens[0].issuer);
-        /*
+        //console.log(res.data.tokens[0].currency);
+        //console.log(res.data.tokens[0].issuer);
         let count = 0;
         let id = 0;
         const theTokens = res.data.tokens.forEach((element) => {
@@ -32,9 +31,10 @@ async function getTokens() {
             var params = [id, element.currency, element.issuer];
             //console.log(params);
             db.run(sql, params, function(err) {
-                const stmt6 = db.prepare("SELECT * FROM tokens");
-                var results = stmt6.all();
-                console.log(results);
+                //const stmt6 = db.prepare("SELECT * FROM tokens");
+                //var results = stmt6.all();
+                //console.log(results);
+                console.log(`inserted: ${this.lastID}`);
                 if (err) {
                     console.log("Error when adding token: ", err.message);
                 }
