@@ -26,7 +26,7 @@ async function getTokens() {
         const theTokens = res.data.tokens.forEach((element) => {
             count++;
             id++;
-            let sql = "INSERT INTO tokens (?,?,?)";
+            let sql = "INSERT INTO tokens VALUES (?,?,?)";
             //console.log(sql);
             var params = [id, element.currency, element.issuer];
             db.prepare(sql, params).run();
