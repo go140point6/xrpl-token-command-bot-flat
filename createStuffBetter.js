@@ -39,7 +39,7 @@ async function grabTokens() {
     var results = stmt2.get();
     //var results = stmt.all();
     console.log(Object.values(results));
-    if (Object.values(results) === 1) {
+    if (Object.values(results) === true) {
         console.log("true");
     } else {
         console.log("false");
