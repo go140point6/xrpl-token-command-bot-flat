@@ -31,7 +31,7 @@ async function getTokens() {
     });
 };
 
-function grabTokens() {
+async function grabTokens() {
     await getTokens();
     const stmt = db.prepare("SELECT * FROM tokens");
     var results = stmt.all();
