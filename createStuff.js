@@ -18,9 +18,10 @@ function createTables() {
 async function getTokens() {
     await axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
         //console.log(res.data);
-        //console.log(res.data.tokens);
+        console.log(res.data.tokens);
         //console.log(res.data.tokens[0].currency);
         //console.log(res.data.tokens[0].issuer);
+        /*
         let count = 0;
         let id = 0;
         const theTokens = res.data.tokens.forEach((element) => {
@@ -50,7 +51,7 @@ async function getTokens() {
         console.log(count);
         //let length = allTokens.length;
         //console.log(length);
-        
+        */
     });
 }
 
