@@ -9,6 +9,7 @@ var sql = `CREATE TABLE IF NOT EXISTS ${tableName} ${fields}`;
 const createTable = db.prepare(sql);
 createTable.run();
 
+/*
 axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
     //console.log(res.data.tokens);
     let count = 0;
@@ -28,7 +29,7 @@ axios.get(`https://api.onthedex.live/public/v1/aggregator`).then(res => {
     //console.log(results);
 
 });
-
+*/
 const stmt = db.prepare("SELECT * FROM tokens");
 var results = stmt.all();
 console.log(results);
