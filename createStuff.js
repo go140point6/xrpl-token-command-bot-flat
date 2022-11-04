@@ -26,21 +26,24 @@ async function getTokens() {
         const theTokens = res.data.tokens.forEach((element) => {
             count++;
             id++;
-            let sql = "INSERT INTO tokens(id,issuer,currency) VALUES(?,?,?)";
+            let sql = "INSERT INTO tokens (?,?,?)";
             //console.log(sql);
             var params = [id, element.currency, element.issuer];
+            db.prepare(sql, params).run();
+            const stmt7 = db.prepare("SELECT * FROM tokens");
+            var results = stmt7.all();
+            console.log(results);
             //console.log(params);
-            db.prepare(sql, params, function(err) {
+            //db.prepare(sql, params, function(err) {
                 //const stmt6 = db.prepare("SELECT * FROM tokens");
                 //var results = stmt6.all();
                 //console.log(results);
-                console.log(`inserted: ${this.lastID}`);
-                if (err) {
-                    console.log("Error when adding token: ", err.message);
-                }
+            //    if (err) {
+            //        console.log("Error when adding token: ", err.message);
+            //    }
                 //console.log(`inserted: ${this.lastID}`);
-                console.log(`${id},${element.currency},${element.issuer}`);
-            });
+            //    console.log(`${id},${element.currency},${element.issuer}`);
+            //});
             //console.log(element.currency + " and " + element.issuer);
             //count++;
         })
@@ -52,7 +55,9 @@ async function getTokens() {
 }
 
 async function getMoreTokens() {
-    console.log("Time to get more tokens");
+    //console.log("Time to get more tokens");
+    let sql = "SELECT * FROM tokens";
+    db.prepare(sql);
 }
 
 async function allTokens() {
