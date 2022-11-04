@@ -54,11 +54,10 @@ async function getPairs() {
                 console.log(`${id},${element.issuer},${element.currency}`);
             });
             console.log(element.currency + " and " + element.issuer);
-            count++;
         })
         console.log(count);
-        let length = allTokens.length;
-        console.log(length);
+        //let length = allTokens.length;
+        //console.log(length);
     });
 }
 
