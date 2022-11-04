@@ -30,7 +30,7 @@ async function getTokens() {
             //console.log(sql);
             var params = [id, element.currency, element.issuer];
             //console.log(params);
-            db.run(sql, params, function(err) {
+            db.prepare(sql, params, function(err) {
                 //const stmt6 = db.prepare("SELECT * FROM tokens");
                 //var results = stmt6.all();
                 //console.log(results);
