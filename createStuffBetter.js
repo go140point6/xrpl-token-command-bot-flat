@@ -36,9 +36,9 @@ async function grabTokens() {
     //await getTokens();
     //const stmt = db.prepare("SELECT * FROM tokens");
     const stmt2 = db.prepare("SELECT EXISTS (SELECT name FROM sqlite_schema WHERE type='table' AND name='jojo')");
-    var results = stmt2.all();
+    var results = stmt2.get();
     //var results = stmt.all();
-    console.log(results);    
+    console.log(results);
 }
 
 grabTokens();
