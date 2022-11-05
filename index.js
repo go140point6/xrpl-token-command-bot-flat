@@ -4,19 +4,14 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const { token, clientId, guildId } = require('./config.json');
 const axios = require('axios');
+const Database = require('better-sqlite3');
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const db = new Database('./data/tokens.db');
 
 var inUSD = 0;
 var currency;
-
-const xrplTokens = [
-    { currency: 'BANANA', issuer: 'r3KSyXmYTYd6wd6ZwtrbEhQMjnJW3xpK4j'},
-    { currency: 'CLUB', issuer: 'r9pAKbAMx3wpMAS9XvvDzLYppokfKWTSq4'},
-    { currency: 'PHX', issuer: 'rfEJ1ksD22TsCy8hdKoJuC6Xfc33VCKPUs'},
-    { currency: 'XBAE', issuer: 'rGc7CTU22AbPg8drYWTYsdGVk6nfssSPBK'}
-  ]
 
 const ping = {
     data: new SlashCommandBuilder()
@@ -62,7 +57,7 @@ async function getXRP() {
             }
             return;
         })
-}
+};
 
 async function getXRPToken() {
     await getXRP();
@@ -77,8 +72,6 @@ client.once(Events.ClientReady, c => {
 
     const commandData = command.map((command) => command.data.toJSON());
     //console.log(commandData);
-
-    //getPrices();
 
     const rest = new REST({ version: '10' }).setToken(token);
     
@@ -102,38 +95,63 @@ client.on(Events.InteractionCreate, async interaction => {
 	} else if (commandName === 'beep') {
 		await interaction.reply('Boop!');
     } else if (commandName === 'xrpl-token') {
-        //await interaction.reply('589!');
+        await interaction.deferReply();
         await getXRPToken();
+        console.log(currentXRP);
+
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
-        //console.log(ticker);
-        let tic = xrplTokens.find(t => t.currency === ticker);
-        if (tic !== undefined) {
-            //console.log(tic.currency);
-            //console.log(tic.issuer);
-        } else {
-            //console.log("meatbag");
-        }
         
-        if (tic !== undefined) {
-            //console.log(tic.currency);
-            //console.log(tic.issuer);
-            await axios.get(`https://api.onthedex.live/public/v1/ticker/${tic.currency}.${tic.issuer}:XRP`).then(res => {
+        //const stmt = db.prepare("SELECT * FROM tokens");
+        //var results = stmt.all();
+        //console.log(results);
+
+        //const stmt2 = db.prepare("SELECT * FROM tokens WHERE currency = ?");
+        //var results2 = stmt2.all("USD");
+        //console.log(results2);
+
+        //const stmt3 = db.prepare("SELECT * FROM tokens");
+        //var results3 = stmt3.all().map(item => {
+        //    return Object.values(item).join();
+        //});
+        //console.log(results3);
+
+        //const stmt4 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
+        //var results4 = stmt4.all(ticker);
+        //console.log(results4);  
+
+        const stmt5 = db.prepare('SELECT currency, issuer FROM tokens WHERE currency = ? COLLATE NOCASE');
+        var results5 = stmt5.all(ticker);
+        //var results5 = stmt5.all(ticker).map(item => {
+        //    return Object.values(item).join();
+        //});
+        let arrayCheck = Array.isArray(results5);
+        //console.log("That is an array: " + arrayCheck);
+        console.log("Number in array: " + results5.length);
+        //console.log(results5);
+        //console.log(results5[0].currency);
+        //results5.forEach(element => console.log(element));
+        //results5.forEach(element => console.log(element.currency));
+        //results5.forEach(element => console.log(element.issuer))
+
+        if (Array.isArray(results5) && results5.length == 1) {
+            //console.log("Array exists and has exactly 1 item");
+            let currency = results5[0].currency;
+            let issuer = results5[0].issuer;
+            await axios.get(`https://api.onthedex.live/public/v1/ticker/${currency}.${issuer}:XRP`).then(res => {
                 if(res.data && res.data.pairs[0].last) {
-                    //console.log(res.data);
-                    //console.log(res.data.pairs[0].last);
                     const inXRP = res.data.pairs[0].last;
-                    //console.log(inXRP);
-                    inUSD = (inXRP * currentXRP).toFixed(4);
-                    //console.log(inUSD);
-                    interaction.reply({ content: `Current price of ${ticker} is USD ${inUSD}` });
+                    inUSD = (inXRP * currentXRP).toFixed(6);
+                    interaction.editReply({ content: `Current price of ${ticker} is USD ${inUSD}` });
                 }
             }).catch(err => {
-                interaction.reply({ content: `Some error, are you sure ${ticker} is a valid token on the XRPL??`})
+                interaction.editReply({ content: `Some error with api call, please try again or ping an admin.`});
             });
+        } else if (Array.isArray(results5) && results5.length > 1) {
+            interaction.editReply({ content: `Found more than one ${ticker} in database and the meatbag didn't program me for that yet.` });
         } else {
-            interaction.reply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to add it.` });
+            interaction.editReply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
         }
-	}
+    }
 });
 
 // Log in to Discord with your client's token
