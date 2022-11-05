@@ -57,7 +57,7 @@ async function getXRP() {
             }
             //return;
         }).catch(err => {
-            console.log("An error with the Coin Gecko api call: ", err.response.status);
+            console.log("An error with the Coin Gecko api call: ", err.response.status, err.response.statusText);
     });
 };
 
