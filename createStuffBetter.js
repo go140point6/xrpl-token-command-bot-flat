@@ -38,6 +38,7 @@ async function grabTokens() {
     //const stmt2 = db.prepare("SELECT EXISTS (SELECT name FROM sqlite_schema WHERE type='table' AND name='tokens')");
     //var results = stmt2.get();
     var results = stmt.all();
+    console.log(results);
     //console.log(Object.values(results));
     //const isZero = results.every(item => item === 0)
 }
