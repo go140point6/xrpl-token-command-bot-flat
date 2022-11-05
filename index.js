@@ -97,7 +97,7 @@ client.on(Events.InteractionCreate, async interaction => {
     } else if (commandName === 'xrpl-token') {
         await interaction.deferReply();
         await getXRPToken();
-        console.log(currentXRP);
+        //console.log(currentXRP);
 
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
         
@@ -124,9 +124,9 @@ client.on(Events.InteractionCreate, async interaction => {
         //var results5 = stmt5.all(ticker).map(item => {
         //    return Object.values(item).join();
         //});
-        let arrayCheck = Array.isArray(results5);
+        //let arrayCheck = Array.isArray(results5);
         //console.log("That is an array: " + arrayCheck);
-        console.log("Number in array: " + results5.length);
+        //console.log("Number in array: " + results5.length);
         //console.log(results5);
         //console.log(results5[0].currency);
         //results5.forEach(element => console.log(element));
