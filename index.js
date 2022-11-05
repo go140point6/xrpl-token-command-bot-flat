@@ -55,7 +55,7 @@ async function getXRP() {
             } else {
                 console.log("Error loading coin data")
             }
-            return;
+            //return;
         }).catch(err => {
             interaction.editReply({ content: `Some error with api call, please try again or ping an admin.`});
     });
