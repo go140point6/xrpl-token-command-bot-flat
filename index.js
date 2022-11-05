@@ -92,11 +92,11 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	const { commandName } = interaction;
 
-	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-	} else if (commandName === 'beep') {
-		await interaction.reply('Boop!');
-    } else if (commandName === 'xrpl-token') {
+	if (commandName === 'xrpl-token') {
+	//	await interaction.reply('Pong!');
+	//} else if (commandName === 'beep') {
+	//	await interaction.reply('Boop!');
+    //} else if (commandName === 'xrpl-token') {
         await interaction.deferReply();
         await getXRPToken();
         //console.log(currentXRP);
@@ -128,8 +128,8 @@ client.on(Events.InteractionCreate, async interaction => {
         //});
         //let arrayCheck = Array.isArray(results5);
         //console.log("That is an array: " + arrayCheck);
-        console.log("Number in array: " + results5.length);
-        console.log(results5);
+        console.log("Number in array for " + ticker + " is " + results5.length);
+        //console.log(results5);
         //console.log(results5[0].currency);
         //results5.forEach(element => console.log(element));
         //results5.forEach(element => console.log(element.currency));
@@ -151,7 +151,7 @@ client.on(Events.InteractionCreate, async interaction => {
         } else if (Array.isArray(results5) && results5.length > 1) {
             interaction.editReply({ content: `Found more than one ${ticker} in database and the meatbag didn't program me for that yet.` });
         } else {
-            interaction.editReply({ content: `Sorry, the meatbag didn't program me for ${ticker} and it wasn't a recent top 100 by volume, market-cap or trades.  Ask him to update the database.` });
+            interaction.editReply({ content: `Sorry, the meatbag didn't program me for ${ticker}, please ask him to update the database.` });
         }
     }
 });
