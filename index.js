@@ -57,7 +57,7 @@ async function getXRP() {
             }
             //return;
         }).catch(err => {
-            console.log("Some error with api call, please try again or ping an admin.");
+            console.log("An error with the Coin Gecko api call: ", err);
     });
 };
 
