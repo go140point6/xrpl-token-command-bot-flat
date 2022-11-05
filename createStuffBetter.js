@@ -33,17 +33,13 @@ async function getTokens() {
 };
 
 async function grabTokens() {
-    //await getTokens();
-    //const stmt = db.prepare("SELECT * FROM tokens");
-    const stmt2 = db.prepare("SELECT EXISTS (SELECT name FROM sqlite_schema WHERE type='table' AND name='tokens')");
-    var results = stmt2.get();
-    //var results = stmt.all();
-    console.log(Object.values(results));
-    if (Object.values(results) === true) {
-        console.log("true");
-    } else {
-        console.log("false");
-    }
+    await getTokens();
+    const stmt = db.prepare("SELECT * FROM tokens");
+    //const stmt2 = db.prepare("SELECT EXISTS (SELECT name FROM sqlite_schema WHERE type='table' AND name='tokens')");
+    //var results = stmt2.get();
+    var results = stmt.all();
+    //console.log(Object.values(results));
+    //const isZero = results.every(item => item === 0)
 }
 
 grabTokens();
