@@ -87,7 +87,7 @@ client.one(Events.ClientReady, c => {
 	    .catch(console.error);
     }); 
 
-    await getXRPToken()
+    getXRPToken()
     setInterval(getXRPToken, Math.max(1, 5 || 1) * 60 * 1000);
 
 client.on(Events.InteractionCreate, async interaction => {
