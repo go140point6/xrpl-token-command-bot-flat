@@ -67,7 +67,7 @@ async function getXRPToken() {
 
 // When the client is ready, run this code (only once)
 // We use 'c' for the event parameter to keep it separate from the already defined 'client'
-client.once(Events.ClientReady, c => {
+client.one(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
     const command = [ping, beep, xrplToken];
     //console.log(command);
@@ -87,6 +87,9 @@ client.once(Events.ClientReady, c => {
 	    .catch(console.error);
     }); 
 
+    await getXRPToken()
+    setInterval(getXRPToken, Math.max(1, 5 || 1) * 60 * 1000);
+
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
@@ -98,7 +101,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	//	await interaction.reply('Boop!');
     //} else if (commandName === 'xrpl-token') {
         await interaction.deferReply();
-        await getXRPToken();
+        //await getXRPToken();
         //console.log(currentXRP);
 
         const ticker = (interaction.options.getString("ticker", true)).toUpperCase();
