@@ -131,7 +131,7 @@ client.on(Events.InteractionCreate, async interaction => {
         //});
         //let arrayCheck = Array.isArray(results5);
         //console.log("That is an array: " + arrayCheck);
-        console.log("Current XRP price is :" + currentXRP);
+        console.log("Current XRP price is $" + currentXRP);
         console.log("Number in array for " + ticker + " is " + results5.length);
         //console.log(results5);
         //console.log(results5[0].currency);
